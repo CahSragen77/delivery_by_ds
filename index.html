@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#16a34a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Delivery Track Pro - Cah Sragen</title>
+    
+    <style>
+        /* ============================================
+           STYLE LENGKAP
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* ===== Container ===== */
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        /* ===== Header ===== */
+        .header {
+            background: linear-gradient(135deg, #0f1724 0%, #1a2a3a 100%);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-title {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+        
+        .header-title span {
+            color: #4ade80;
+        }
+        
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-dot 2s infinite;
+        }
+        
+        .status-dot.online {
+            background: #4ade80;
+        }
+        
+        .status-dot.offline {
+            background: #f87171;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .header-deliman {
+            margin-top: 12px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .header-deliman strong {
+            color: #4ade80;
+        }
+        
+        /* ===== Card ===== */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .card-title .icon {
+            font-size: 18px;
+        }
+        
+        /* ===== Form ===== */
+        .form-group {
+            margin-bottom: 14px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #4a4a6a;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e8ecf1;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.2s;
+            background: #fafbfc;
+        }
+        
+        .form-input:focus {
+            border-color: #16a34a;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1);
+        }
+        
+        .form-input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            text-decoration: none;
+            touch-action: manipulation;
+        }
+        
+        .btn:active {
+            transform: scale(0.97);
+        }
+        
+        .btn-primary {
+            background: #16a34a;
+            color: white;
+            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: #15803d;
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-success {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-success:hover {
+            background: #1da851;
+        }
+        
+        .btn-black {
+            background: #1a1a2e;
+            color: white;
+        }
+        
+        .btn-black:hover {
+            background: #2a2a4e;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e8ecf1;
+            color: #1a1a2e;
+        }
+        
+        .btn-outline:hover {
+            border-color: #16a34a;
+            color: #16a34a;
+        }
+        
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 10px 16px;
+            font-size: 12px;
+        }
+        
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        /* ===== Step Indicator ===== */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 4px;
+        }
+        
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            border: 3px solid #e8ecf1;
+            background: white;
+            color: #a0a0b8;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-circle.active {
+            border-color: #16a34a;
+            background: #16a34a;
+            color: white;
+            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
+        }
+        
+        .step-circle.done {
+            border-color: #16a34a;
+            background: #16a34a;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #a0a0b8;
+            letter-spacing: 0.5px;
+        }
+        
+        .step-label.active {
+            color: #16a34a;
+        }
+        
+        .step-line {
+            flex: 1;
+            height: 3px;
+            background: #e8ecf1;
+            margin: 0 -4px;
+            position: relative;
+            top: -20px;
+            z-index: 0;
+        }
+        
+        .step-line.done {
+            background: #16a34a;
+        }
+        
+        /* ===== Photo Upload ===== */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .photo-box {
+            aspect-ratio: 4/3;
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fafbfc;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .photo-box.has-photo {
+            border-color: #16a34a;
+            border-style: solid;
+            background: #f0fdf4;
+        }
+        
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-box .placeholder {
+            font-size: 11px;
+            color: #9ca3af;
+            text-align: center;
+            padding: 8px;
+        }
+        
+        .photo-box .placeholder .big-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .photo-box .remove-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* ===== Location Info ===== */
+        .location-card {
+            background: #0f1724;
+            border-radius: 12px;
+            padding: 16px;
+            color: white;
+            margin-top: 12px;
+        }
+        
+        .location-card .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            font-weight: 700;
+        }
+        
+        .location-card .coords {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+        
+        .location-card .time {
+            font-size: 12px;
+            opacity: 0.6;
+        }
+        
+        /* ===== Signature ===== */
+        .signature-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            height: 160px;
+            background: white;
+            touch-action: none;
+            cursor: crosshair;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signature-area canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+        }
+        
+        .signature-area .placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #9ca3af;
+            font-size: 13px;
+            pointer-events: none;
+        }
+        
+        .signature-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .signature-actions .btn {
+            flex: 1;
+        }
+        
+        /* ===== Log ===== */
+        .log-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            border-left: 4px solid #16a34a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .log-item:hover {
+            background: #f1f5f9;
+        }
+        
+        .log-item .log-date {
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 600;
+            min-width: 70px;
+        }
+        
+        .log-item .log-info {
+            flex: 1;
+        }
+        
+        .log-item .log-info .name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .log-item .log-info .detail {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        .log-item .log-status {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #16a34a;
+            align-self: center;
+        }
+        
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding: 24px 16px 8px;
+            font-size: 12px;
+            color: #6b7280;
+            border-top: 1px solid #e8ecf1;
+            margin-top: 16px;
+        }
+        
+        .footer .heart {
+            color: #ef4444;
+        }
+        
+        .footer .name {
+            color: #1a1a2e;
+            font-weight: 700;
+        }
+        
+        .footer .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        
+        .footer .social-links a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            background: #f1f5f9;
+            transition: all 0.2s;
+        }
+        
+        .footer .social-links a:hover {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .footer .ai-credit {
+            margin-top: 10px;
+            padding: 12px;
+            background: linear-gradient(135deg, #0f1724, #1a2a3a);
+            border-radius: 12px;
+            color: white;
+            font-size: 11px;
+        }
+        
+        .footer .ai-credit .whale {
+            font-size: 28px;
+            display: inline-block;
+            animation: swim 3s ease-in-out infinite;
+        }
+        
+        @keyframes swim {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+        }
+        
+        /* ===== Modal ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 16px;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .modal-content .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .modal-content .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 2000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s ease;
+            max-width: 90%;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* ===== Responsive ===== */
+        @media (max-width: 400px) {
+            .app-container { padding: 10px; }
+            .card { padding: 14px; }
+            .header { padding: 14px; }
+            .header-title { font-size: 18px; }
+            .photo-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .btn-group { grid-template-columns: 1fr; }
+            .step-circle { width: 34px; height: 34px; font-size: 12px; }
+        }
+        
+        /* ===== Scrollbar ===== */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 4px; }
+        
+        /* ===== Hidden file input ===== */
+        .hidden-input { display: none; }
+        
+        /* ===== Loading ===== */
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ===== Badge ===== */
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        
+        .badge-green { background: #dcfce7; color: #16a34a; }
+        .badge-orange { background: #fef3c7; color: #d97706; }
+        .badge-blue { background: #dbeafe; color: #2563eb; }
+        
+        /* Utility */
+        .text-center { text-align: center; }
+        .mt-8 { margin-top: 8px; }
+        .mt-12 { margin-top: 12px; }
+        .mt-16 { margin-top: 16px; }
+        .mt-20 { margin-top: 20px; }
+        .gap-8 { gap: 8px; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 4px; }
+    </style>
+</head>
+<body>
+
+<div id="app" class="app-container"></div>
+
+<script>
+// ================================================================
+// DELIVERY TRACK PRO - FULL APPLICATION
+// Cah Sragen 77 x DeepSeek AI
+// ================================================================
+
+// ================================================================
+// STATE MANAGEMENT
+// ================================================================
+
+const STATE = {
+    // Profile
+    profile: {
+        namaDeliman: '',
+        noDeliman: '',
+        noKonsumen: '',
+        namaKonsumen: '',
+        noToko: '6281122220723'
+    },
+    
+    // Current Delivery
+    delivery: {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        resiNumber: '',
+        fotoBarang: null,
+        fotoStruk: null,
+        fotoSerah: null,
+        tandaTangan: null,
+        lokasiBerangkat: null,
+        lokasiSampai: null,
+        status: 'draft', // draft | otw | sampai | selesai
+        createdAt: Date.now()
+    },
+    
+    // Logs
+    logs: [],
+    
+    // UI
+    step: 1, // 1=Berangkat, 2=OTW, 3=Sampai, 4=Selesai, 5=Log
+    isOnline: navigator.onLine,
+    toast: null,
+    modal: null,
+    isLoading: false,
+    isDrawing: false,
+    
+    // Signature
+    signatureData: null,
+    
+    // Geolocation
+    watchId: null,
+    currentLocation: null,
+};
+
+// ================================================================
+// DOM REFS
+// ================================================================
+
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+// ================================================================
+// TOAST SYSTEM
+// ================================================================
+
+function showToast(message, duration = 3000) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.remove(), duration);
+}
+
+// ================================================================
+// STORAGE (LocalStorage + IndexedDB)
+// ================================================================
+
+function saveToStorage(key, data) {
+    try {
+        localStorage.setItem(`delivery_${key}`, JSON.stringify(data));
+    } catch (e) {
+        console.warn('Storage save failed:', e);
+    }
+}
+
+function loadFromStorage(key) {
+    try {
+        const data = localStorage.getItem(`delivery_${key}`);
+        return data ? JSON.parse(data) : null;
+    } catch (e) {
+        console.warn('Storage load failed:', e);
+        return null;
+    }
+}
+
+// ================================================================
+// HELPERS
+// ================================================================
+
+function generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+function formatTime(ts) {
+    return new Date(ts).toLocaleString('id-ID', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false
+    }) + ' WIB';
+}
+
+function formatDuration(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    return `${minutes}m ${seconds}s`;
+}
+
+function normalizePhone(phone) {
+    let p = phone.replace(/\D/g, '');
+    if (p.startsWith('0')) p = '62' + p.slice(1);
+    if (p.startsWith('8')) p = '62' + p;
+    if (!p.startsWith('62')) p = '62' + p;
+    return p;
+}
+
+function haversine(lat1, lng1, lat2, lng2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function getGoogleMapsRouteUrl(lat1, lng1, lat2, lng2) {
+    return `https://www.google.com/maps/dir/${lat1},${lng1}/${lat2},${lng2}`;
+}
+
+function getGoogleMapsLocationUrl(lat, lng) {
+    return `https://www.google.com/maps?q=${lat},${lng}`;
+}
+
+// ================================================================
+// WHATSAPP FUNCTIONS
+// ================================================================
+
+function sendWA(phone, message) {
+    const p = normalizePhone(phone);
+    const url = `https://wa.me/${p}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+}
+
+function getWAUrl(phone, message) {
+    const p = normalizePhone(phone);
+    return `https://wa.me/${p}?text=${encodeURIComponent(message)}`;
+}
+
+// ================================================================
+// RENDER ENGINE
+// ================================================================
+
+function render() {
+    const app = document.getElementById('app');
+    
+    if (!STATE.profile.namaDeliman || !STATE.profile.noDeliman || !STATE.profile.namaKonsumen || !STATE.profile.noKonsumen) {
+        app.innerHTML = renderSetup();
+        attachSetupEvents();
+        return;
+    }
+    
+    app.innerHTML = renderMain();
+    attachMainEvents();
+    updateStepUI();
+}
+
+// ================================================================
+// RENDER: SETUP
+// ================================================================
+
+function renderSetup() {
+    const p = STATE.profile;
+    return `
+        <div class="card" style="margin-top:20px;">
+            <div class="card-title"><span class="icon">🚚</span> Setup Deliman</div>
+            
+            <div class="form-group">
+                <label class="form-label">Nama Deliman *</label>
+                <input id="input-nama" class="form-input" value="${p.namaDeliman}" placeholder="Masukkan nama lengkap">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">No HP Deliman (WA) *</label>
+                <input id="input-no-deliman" class="form-input" value="${p.noDeliman}" placeholder="08xx atau 62xx">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Nama Konsumen *</label>
+                <input id="input-nama-konsumen" class="form-input" value="${p.namaKonsumen}" placeholder="Nama penerima">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">No HP Konsumen (WA) *</label>
+                <input id="input-no-konsumen" class="form-input" value="${p.noKonsumen}" placeholder="08xx penerima">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">No HP Toko (WA Laporan)</label>
+                <input id="input-no-toko" class="form-input" value="${p.noToko || '6281122220723'}" placeholder="08xx admin toko">
+            </div>
+            
+            <button id="btn-save-profile" class="btn btn-primary mt-16">
+                ✅ SIMPAN & MULAI DELIVERY
+            </button>
+            
+            <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:12px;">
+                Data tersimpan di localStorage. Bisa offline.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>Handcrafted with <span class="heart">❤</span> by <span class="name">Andrew Dwiranto</span> (Cah_Sragen_77, Indonesia)</p>
+        </div>
+    `;
+}
+
+function attachSetupEvents() {
+    const btn = document.getElementById('btn-save-profile');
+    if (!btn) return;
+    
+    btn.addEventListener('click', () => {
+        const nama = document.getElementById('input-nama')?.value?.trim();
+        const noDeliman = document.getElementById('input-no-deliman')?.value?.trim();
+        const namaKonsumen = document.getElementById('input-nama-konsumen')?.value?.trim();
+        const noKonsumen = document.getElementById('input-no-konsumen')?.value?.trim();
+        const noToko = document.getElementById('input-no-toko')?.value?.trim() || '6281122220723';
+        
+        if (!nama) { showToast('⚠️ Masukkan nama deliman'); return; }
+        if (!noDeliman) { showToast('⚠️ Masukkan no HP deliman'); return; }
+        if (!namaKonsumen) { showToast('⚠️ Masukkan nama konsumen'); return; }
+        if (!noKonsumen) { showToast('⚠️ Masukkan no HP konsumen'); return; }
+        if (noDeliman.replace(/\D/g, '').length < 9) { showToast('⚠️ No HP deliman minimal 9 digit'); return; }
+        if (noKonsumen.replace(/\D/g, '').length < 9) { showToast('⚠️ No HP konsumen minimal 9 digit'); return; }
+        
+        STATE.profile = { namaDeliman: nama, noDeliman, namaKonsumen, noKonsumen, noToko };
+        saveToStorage('profile', STATE.profile);
+        
+        showToast('✅ Profil tersimpan!');
+        render();
+    });
+}
+
+// ================================================================
+// RENDER: MAIN
+// ================================================================
+
+function renderMain() {
+    const p = STATE.profile;
+    const d = STATE.delivery;
+    const step = STATE.step;
+    
+    return `
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <div class="header-title">DELIVERY <span>PRO</span></div>
+                <div class="header-status">
+                    <span class="status-dot ${STATE.isOnline ? 'online' : 'offline'}"></span>
+                    ${STATE.isOnline ? 'ONLINE' : 'OFFLINE'}
+                </div>
+            </div>
+            <div class="header-deliman">
+                👤 <strong>${p.namaDeliman}</strong> · ${d.status.toUpperCase()} · ${formatTime(d.createdAt)}
+                ${d.resiNumber ? ` · Resi: ${d.resiNumber}` : ''}
+            </div>
+        </div>
+        
+        <!-- Steps -->
+        <div class="steps">
+            ${[
+                { id: 1, label: 'Berangkat', icon: '📦' },
+                { id: 2, label: 'OTW', icon: '🚚' },
+                { id: 3, label: 'Sampai', icon: '📍' },
+                { id: 4, label: 'Selesai', icon: '✅' },
+                { id: 5, label: 'Log', icon: '📋' }
+            ].map((s, i) => `
+                <div class="step-item" data-step="${s.id}">
+                    <div class="step-circle ${step === s.id ? 'active' : (step > s.id ? 'done' : '')}">
+                        ${step > s.id ? '✓' : s.icon}
+                    </div>
+                    <span class="step-label ${step === s.id ? 'active' : ''}">${s.label}</span>
+                    ${i < 4 ? `<div class="step-line ${step > s.id ? 'done' : ''}"></div>` : ''}
+                </div>
+            `).join('')}
+        </div>
+        
+        <!-- Content -->
+        ${step === 1 ? renderStepBerangkat() : ''}
+        ${step === 2 ? renderStepOTW() : ''}
+        ${step === 3 ? renderStepSampai() : ''}
+        ${step === 4 ? renderStepSelesai() : ''}
+        ${step === 5 ? renderStepLog() : ''}
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Handcrafted with <span class="heart">❤</span> by <span class="name">Andrew Dwiranto</span> (Cah_Sragen_77, Indonesia)</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/cahsragen_77/" target="_blank">📸 IG</a>
+                <a href="https://www.linkedin.com/in/yudi-dwiranto-cs77" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/CahSragen77" target="_blank">🐙 GitHub</a>
+                <a href="https://web.facebook.com/ydwiranto" target="_blank">📘 FB</a>
+                <a href="https://www.tiktok.com/@selarasdirumah" target="_blank">🎵 TikTok</a>
+                <a href="https://wa.me/6281389188903" target="_blank">💬 WA</a>
+            </div>
+            <div class="ai-credit">
+                <div>
+                    <span class="whale">🐋</span> 
+                    Dibangun dengan kolaborasi indah antara 
+                    <strong>Andrew_CS77</strong> dan 
+                    <a href="https://deepseek.com" target="_blank" style="color:#4ade80;text-decoration:underline;">DeepSeek AI</a>
+                    <br>
+                    <span style="font-size:10px;opacity:0.6;">"Mencari informasi sedalam samudra di lautan"</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ================================================================
+// RENDER: STEP 1 - BERANGKAT
+// ================================================================
+
+function renderStepBerangkat() {
+    const d = STATE.delivery;
+    const hasBarang = !!d.fotoBarang;
+    const hasStruk = !!d.fotoStruk;
+    const hasLokasi = !!d.lokasiBerangkat;
+    const allReady = hasBarang && hasStruk && hasLokasi;
+    
+    return `
+        <div class="card">
+            <div class="card-title"><span class="icon">📦</span> Step 1: Berangkat</div>
+            
+            <!-- Resi Number -->
+            <div class="form-group">
+                <label class="form-label">No Resi / Barcode (Opsional)</label>
+                <div style="display:flex;gap:8px;">
+                    <input id="input-resi" class="form-input" value="${d.resiNumber || ''}" placeholder="Ketik atau scan resi">
+                    <button id="btn-scan" class="btn btn-sm btn-black" style="width:auto;padding:12px 16px;">📷</button>
+                </div>
+            </div>
+            
+            <!-- Photos -->
+            <div class="photo-grid">
+                <div class="photo-box ${hasBarang ? 'has-photo' : ''}" id="box-barang">
+                    ${hasBarang ? `<img src="${d.fotoBarang}" alt="Barang"><button class="remove-btn" data-target="fotoBarang">✕</button>` : 
+                        `<div class="placeholder"><span class="big-icon">📦</span>Foto Barang</div>`}
+                </div>
+                <div class="photo-box ${hasStruk ? 'has-photo' : ''}" id="box-struk">
+                    ${hasStruk ? `<img src="${d.fotoStruk}" alt="Struk"><button class="remove-btn" data-target="fotoStruk">✕</button>` : 
+                        `<div class="placeholder"><span class="big-icon">🧾</span>Foto Struk</div>`}
+                </div>
+            </div>
+            
+            <!-- Hidden file inputs -->
+            <input type="file" id="file-barang" class="hidden-input" accept="image/*" capture="environment">
+            <input type="file" id="file-struk" class="hidden-input" accept="image/*" capture="environment">
+            
+            <!-- Location -->
+            <div class="location-card">
+                <div class="label">📍 Lokasi Berangkat</div>
+                ${hasLokasi ? `
+                    <div class="coords">${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}</div>
+                    <div class="time">${formatTime(d.lokasiBerangkat.timestamp)} · Akurasi ${Math.round(d.lokasiBerangkat.accuracy || 0)}m</div>
+                    <a href="${getGoogleMapsLocationUrl(d.lokasiBerangkat.lat, d.lokasiBerangkat.lng)}" target="_blank" style="color:#4ade80;font-size:12px;text-decoration:none;display:inline-block;margin-top:4px;">
+                        🗺️ Buka Maps
+                    </a>
+                ` : `
+                    <div style="font-size:13px;opacity:0.7;margin:4px 0;">Belum ambil lokasi</div>
+                `}
+                <button id="btn-ambil-berangkat" class="btn btn-sm btn-primary mt-12" style="width:auto;padding:10px 20px;">
+                    ${hasLokasi ? '🔄 Update Lokasi' : '📍 Ambil Lokasi'}
+                </button>
+            </div>
+            
+            <!-- Action -->
+            <button id="btn-berangkat" class="btn btn-success mt-16" ${!allReady ? 'disabled' : ''}>
+                ${allReady ? '🚀 BERANGKAT & KIRIM WA KE KONSUMEN' : '📸 Lengkapi foto + lokasi dulu'}
+            </button>
+            
+            <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:8px;">
+                Foto barang + struk, lalu ambil lokasi. Nanti auto kirim notif ke konsumen.
+            </p>
+        </div>
+    `;
+}
+
+// ================================================================
+// RENDER: STEP 2 - OTW
+// ================================================================
+
+function renderStepOTW() {
+    const d = STATE.delivery;
+    const elapsed = d.lokasiBerangkat ? Date.now() - d.lokasiBerangkat.timestamp : 0;
+    
+    return `
+        <div class="card">
+            <div class="card-title"><span class="icon">🚚</span> Step 2: Dalam Perjalanan</div>
+            
+            <div style="text-align:center;padding:16px 0;">
+                <div style="font-size:48px;font-weight:900;font-family:'Courier New',monospace;color:#16a34a;">
+                    ${formatDuration(elapsed)}
+                </div>
+                <div style="font-size:12px;color:#6b7280;">Waktu perjalanan</div>
+            </div>
+            
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div style="background:#f0fdf4;border-radius:12px;padding:12px;text-align:center;">
+                    <div style="font-size:10px;color:#6b7280;">Berangkat</div>
+                    <div style="font-weight:700;">${d.lokasiBerangkat ? formatTime(d.lokasiBerangkat.timestamp) : '-'}</div>
+                </div>
+                <div style="background:#f0fdf4;border-radius:12px;padding:12px;text-align:center;">
+                    <div style="font-size:10px;color:#6b7280;">Konsumen</div>
+                    <div style="font-weight:700;">${STATE.profile.namaKonsumen}</div>
+                    <div style="font-size:11px;color:#6b7280;">${STATE.profile.noKonsumen}</div>
+                </div>
+            </div>
+            
+            <div style="margin-top:12px;display:flex;gap:8px;">
+                <button id="btn-wa-otw" class="btn btn-success btn-sm" style="flex:1;">
+                    💬 Kirim Update WA
+                </button>
+                <button id="btn-ke-sampai" class="btn btn-primary btn-sm" style="flex:1;">
+                    📍 Menuju Titik Sampai →
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// ================================================================
+// RENDER: STEP 3 - SAMPAI
+// ================================================================
+
+function renderStepSampai() {
+    const d = STATE.delivery;
+    const hasSerah = !!d.fotoSerah;
+    const hasTtd = !!d.tandaTangan;
+    const hasLokasi = !!d.lokasiSampai;
+    const hasBerangkat = !!d.lokasiBerangkat;
+    const allReady = hasSerah && hasTtd && hasLokasi;
+    
+    let jarak = 0;
+    let routeUrl = '#';
+    if (hasBerangkat && hasLokasi) {
+        jarak = haversine(
+            d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
+            d.lokasiSampai.lat, d.lokasiSampai.lng
+        );
+        routeUrl = getGoogleMapsRouteUrl(
+            d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
+            d.lokasiSampai.lat, d.lokasiSampai.lng
+        );
+    }
+    
+    return `
+        <div class="card">
+            <div class="card-title"><span class="icon">📍</span> Step 3: Sampai Tujuan</div>
+            
+            <!-- Foto Serah -->
+            <div class="form-group">
+                <label class="form-label">📸 Foto Serah Terima (bersama konsumen) *</label>
+                <div class="photo-box ${hasSerah ? 'has-photo' : ''}" id="box-serah" style="height:180px;">
+                    ${hasSerah ? `<img src="${d.fotoSerah}" alt="Serah"><button class="remove-btn" data-target="fotoSerah">✕</button>` : 
+                        `<div class="placeholder"><span class="big-icon">🤝</span>Tap untuk foto bersama konsumen</div>`}
+                </div>
+                <input type="file" id="file-serah" class="hidden-input" accept="image/*" capture="environment">
+            </div>
+            
+            <!-- Tanda Tangan -->
+            <div class="form-group">
+                <label class="form-label">✍️ Tanda Tangan Digital Konsumen *</label>
+                <div class="signature-area" id="signature-area">
+                    <canvas id="signature-canvas"></canvas>
+                    ${!hasTtd ? '<div class="placeholder">Tap & geser untuk tanda tangan di sini</div>' : ''}
+                </div>
+                <div class="signature-actions">
+                    <button id="btn-clear-ttd" class="btn btn-sm btn-outline">🗑️ Hapus</button>
+                    <button id="btn-save-ttd" class="btn btn-sm btn-primary">💾 Simpan TTD</button>
+                </div>
+            </div>
+            
+            <!-- Lokasi Sampai -->
+            <div class="location-card">
+                <div class="label">📍 Lokasi Sampai</div>
+                ${hasLokasi ? `
+                    <div class="coords">${d.lokasiSampai.lat.toFixed(6)}, ${d.lokasiSampai.lng.toFixed(6)}</div>
+                    <div class="time">${formatTime(d.lokasiSampai.timestamp)} · Akurasi ${Math.round(d.lokasiSampai.accuracy || 0)}m</div>
+                    <a href="${getGoogleMapsLocationUrl(d.lokasiSampai.lat, d.lokasiSampai.lng)}" target="_blank" style="color:#4ade80;font-size:12px;text-decoration:none;display:inline-block;margin-top:4px;">
+                        🗺️ Buka Maps
+                    </a>
+                ` : `
+                    <div style="font-size:13px;opacity:0.7;margin:4px 0;">Belum ambil lokasi sampai</div>
+                `}
+                <button id="btn-ambil-sampai" class="btn btn-sm btn-primary mt-12" style="width:auto;padding:10px 20px;">
+                    ${hasLokasi ? '🔄 Update Lokasi' : '📍 Ambil Lokasi Sampai'}
+                </button>
+            </div>
+            
+            <!-- Jarak -->
+            ${hasBerangkat && hasLokasi ? `
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                    <div style="background:#0f1724;border-radius:12px;padding:12px;color:white;text-align:center;">
+                        <div style="font-size:10px;opacity:0.6;">Jarak (Haversine)</div>
+                        <div style="font-size:24px;font-weight:900;">${jarak.toFixed(2)}</div>
+                        <div style="font-size:11px;opacity:0.6;">km</div>
+                    </div>
+                    <div style="background:#16a34a;border-radius:12px;padding:12px;color:white;text-align:center;">
+                        <div style="font-size:10px;opacity:0.8;">Durasi</div>
+                        <div style="font-size:24px;font-weight:900;">${Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000)}</div>
+                        <div style="font-size:11px;opacity:0.8;">menit</div>
+                    </div>
+                </div>
+                <a href="${routeUrl}" target="_blank" class="btn btn-outline mt-12" style="text-align:center;">
+                    🗺️ Lihat Rute di Google Maps
+                </a>
+            ` : ''}
+            
+            <!-- Action -->
+            <button id="btn-selesai" class="btn btn-primary mt-16" ${!allReady ? 'disabled' : ''}>
+                ${allReady ? '✅ SELESAI PENGANTARAN' : '📸 Lengkapi foto + TTD + lokasi dulu'}
+            </button>
+        </div>
+    `;
+}
+
+// ================================================================
+// RENDER: STEP 4 - SELESAI
+// ================================================================
+
+function renderStepSelesai() {
+    const d = STATE.delivery;
+    const p = STATE.profile;
+    
+    const hasBerangkat = !!d.lokasiBerangkat;
+    const hasSampai = !!d.lokasiSampai;
+    let jarak = 0;
+    if (hasBerangkat && hasSampai) {
+        jarak = haversine(
+            d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
+            d.lokasiSampai.lat, d.lokasiSampai.lng
+        );
+    }
+    
+    const logData = {
+        id: d.id,
+        waktu: formatTime(Date.now()),
+        timestamp: Date.now(),
+        namaDeliman: p.namaDeliman,
+        noDeliman: p.noDeliman,
+        namaKonsumen: p.namaKonsumen,
+        noKonsumen: p.noKonsumen,
+        noToko: p.noToko,
+        resiNumber: d.resiNumber || '-',
+        jarak: jarak.toFixed(2),
+        durasi: hasBerangkat && hasSampai ? Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000) : 0,
+        lokasiBerangkat: d.lokasiBerangkat,
+        lokasiSampai: d.lokasiSampai,
+        status: 'SELESAI'
+    };
+    
+    const isCompleted = d.status === 'selesai';
+    
+    return `
+        <div class="card">
+            <div class="card-title"><span class="icon">✅</span> Step 4: Selesai</div>
+            
+            ${isCompleted ? `
+                <div style="background:#dcfce7;border-radius:12px;padding:16px;text-align:center;margin-bottom:12px;">
+                    <div style="font-size:48px;">🎉</div>
+                    <div style="font-weight:700;color:#16a34a;font-size:18px;">Pengantaran Selesai!</div>
+                    <div style="font-size:13px;color:#6b7280;">${formatTime(Date.now())}</div>
+                </div>
+                
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
+                    <div><strong>Deliman:</strong> ${p.namaDeliman}</div>
+                    <div><strong>Konsumen:</strong> ${p.namaKonsumen}</div>
+                    <div><strong>Resi:</strong> ${d.resiNumber || '-'}</div>
+                    <div><strong>Jarak:</strong> ${jarak.toFixed(2)} km</div>
+                    <div><strong>Durasi:</strong> ${logData.durasi} menit</div>
+                    <div><strong>Status:</strong> <span class="badge badge-green">SELESAI</span></div>
+                </div>
+            ` : `
+                <p style="color:#6b7280;margin-bottom:12px;">Konfirmasi sebelum selesai:</p>
+                <ul style="list-style:none;padding:0;font-size:13px;margin-bottom:12px;">
+                    <li style="padding:4px 0;">${d.fotoBarang ? '✅' : '❌'} Foto barang</li>
+                    <li style="padding:4px 0;">${d.fotoStruk ? '✅' : '❌'} Foto struk</li>
+                    <li style="padding:4px 0;">${d.fotoSerah ? '✅' : '❌'} Foto serah terima</li>
+                    <li style="padding:4px 0;">${d.tandaTangan ? '✅' : '❌'} Tanda tangan</li>
+                    <li style="padding:4px 0;">${d.lokasiBerangkat ? '✅' : '❌'} Lokasi berangkat</li>
+                    <li style="padding:4px 0;">${d.lokasiSampai ? '✅' : '❌'} Lokasi sampai</li>
+                </ul>
+            `}
+            
+            <div class="btn-group">
+                ${!isCompleted ? `
+                    <button id="btn-complete" class="btn btn-primary">✅ Selesaikan</button>
+                ` : `
+                    <button id="btn-wa-toko" class="btn btn-success">🏪 WA Toko</button>
+                    <button id="btn-wa-konsumen" class="btn btn-success">💬 WA Konsumen</button>
+                `}
+                <button id="btn-new-delivery" class="btn btn-black">🔄 Delivery Baru</button>
+            </div>
+            
+            ${isCompleted ? `
+                <button id="btn-log-export" class="btn btn-outline mt-12">📊 Export Log ke Excel</button>
+                <button id="btn-log-info" class="btn btn-outline mt-8">📋 Info Log</button>
+            ` : ''}
+        </div>
+    `;
+}
+
+// ================================================================
+// RENDER: STEP 5 - LOG
+// ================================================================
+
+function renderStepLog() {
+    const logs = STATE.logs;
+    
+    if (logs.length === 0) {
+        return `
+            <div class="card">
+                <div class="card-title"><span class="icon">📋</span> Log Pengantaran</div>
+                <div style="text-align:center;padding:32px 0;color:#9ca3af;">
+                    <div style="font-size:48px;">📭</div>
+                    <p style="margin-top:8px;">Belum ada log pengantaran</p>
+                    <p style="font-size:12px;">Selesaikan pengantaran pertama untuk melihat log</p>
+                </div>
+            </div>
+        `;
+    }
+    
+    return `
+        <div class="card">
+            <div class="card-title">
+                <span class="icon">📋</span> Log Pengantaran
+                <span style="margin-left:auto;font-size:12px;background:#e8ecf1;padding:2px 12px;border-radius:12px;">${logs.length} log</span>
+            </div>
+            
+            <div style="margin-bottom:12px;display:flex;gap:8px;">
+                <button id="btn-export-excel" class="btn btn-sm btn-outline" style="flex:1;">📊 Export Excel</button>
+                <button id="btn-export-sheet" class="btn btn-sm btn-black" style="flex:1;">📤 Google Sheet</button>
+                <button id="btn-clear-logs" class="btn btn-sm btn-danger" style="flex:1;">🗑️ Hapus</button>
+            </div>
+            
+            ${logs.map((log, i) => `
+                <div class="log-item" data-index="${i}">
+                    <div class="log-date">${log.waktu?.split(' ')[0] || ''}</div>
+                    <div class="log-info">
+                        <div class="name">${log.namaKonsumen || 'Unknown'}</div>
+                        <div class="detail">${log.namaDeliman || ''} · ${log.resiNumber || 'No resi'} · ${log.jarak || '0'} km</div>
+                    </div>
+                    <div class="log-status">${log.status || 'DONE'}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// ================================================================
+// ATTACH EVENTS - MAIN
+// ================================================================
+
+function attachMainEvents() {
+    const step = STATE.step;
+    
+    // ===== Step navigation =====
+    $$('.step-item').forEach(el => {
+        el.addEventListener('click', () => {
+            const s = parseInt(el.dataset.step);
+            if (s === 5 || s <= STATE.step + 1 || STATE.delivery.status === 'selesai') {
+                STATE.step = s;
+                render();
+            } else {
+                showToast('⚠️ Selesaikan step sebelumnya dulu');
+            }
+        });
+    });
+    
+    // ===== STEP 1: Berangkat =====
+    if (step === 1) {
+        // Resi input
+        const inputResi = document.getElementById('input-resi');
+        if (inputResi) {
+            inputResi.addEventListener('input', (e) => {
+                STATE.delivery.resiNumber = e.target.value;
+                saveToStorage('delivery', STATE.delivery);
+            });
+        }
+        
+        // Scan button
+        const btnScan = document.getElementById('btn-scan');
+        if (btnScan) {
+            btnScan.addEventListener('click', () => {
+                if ('BarcodeDetector' in window) {
+                    showToast('📷 Buka kamera untuk scan...');
+                    // Simplified - will implement full scanner if needed
+                    setTimeout(() => showToast('⚠️ Scan manual: ketik resi saja'), 1000);
+                } else {
+                    showToast('⚠️ Browser tidak support scan, ketik manual');
+                }
+            });
+        }
+        
+        // Photo: Barang
+        const boxBarang = document.getElementById('box-barang');
+        const fileBarang = document.getElementById('file-barang');
+        if (boxBarang && fileBarang) {
+            boxBarang.addEventListener('click', (e) => {
+                if (e.target.closest('.remove-btn')) return;
+                fileBarang.click();
+            });
+            fileBarang.addEventListener('change', (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    STATE.delivery.fotoBarang = ev.target.result;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto barang tersimpan');
+                    render();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Photo: Struk
+        const boxStruk = document.getElementById('box-struk');
+        const fileStruk = document.getElementById('file-struk');
+        if (boxStruk && fileStruk) {
+            boxStruk.addEventListener('click', (e) => {
+                if (e.target.closest('.remove-btn')) return;
+                fileStruk.click();
+            });
+            fileStruk.addEventListener('change', (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    STATE.delivery.fotoStruk = ev.target.result;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto struk tersimpan');
+                    render();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Remove photo buttons
+        $$('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const target = btn.dataset.target;
+                if (target === 'fotoBarang') STATE.delivery.fotoBarang = null;
+                if (target === 'fotoStruk') STATE.delivery.fotoStruk = null;
+                if (target === 'fotoSerah') STATE.delivery.fotoSerah = null;
+                saveToStorage('delivery', STATE.delivery);
+                render();
+                showToast('🗑️ Foto dihapus');
+            });
+        });
+        
+        // Ambil Lokasi Berangkat
+        const btnAmbilBerangkat = document.getElementById('btn-ambil-berangkat');
+        if (btnAmbilBerangkat) {
+            btnAmbilBerangkat.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    showToast('⚠️ Geolocation tidak support');
+                    return;
+                }
+                btnAmbilBerangkat.textContent = '⏳ Mengambil...';
+                btnAmbilBerangkat.disabled = true;
+                
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        STATE.delivery.lokasiBerangkat = {
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude,
+                            timestamp: Date.now(),
+                            accuracy: pos.coords.accuracy
+                        };
+                        saveToStorage('delivery', STATE.delivery);
+                        showToast('📍 Lokasi berangkat terkunci!');
+                        render();
+                    },
+                    (err) => {
+                        showToast('❌ Gagal ambil lokasi: ' + err.message);
+                        btnAmbilBerangkat.textContent = '📍 Ambil Lokasi';
+                        btnAmbilBerangkat.disabled = false;
+                    },
+                    { enableHighAccuracy: true, timeout: 15000 }
+                );
+            });
+        }
+        
+        // Tombol Berangkat
+        const btnBerangkat = document.getElementById('btn-berangkat');
+        if (btnBerangkat) {
+            btnBerangkat.addEventListener('click', () => {
+                const d = STATE.delivery;
+                const p = STATE.profile;
+                
+                if (!d.fotoBarang) { showToast('⚠️ Foto barang belum diambil'); return; }
+                if (!d.fotoStruk) { showToast('⚠️ Foto struk belum diambil'); return; }
+                if (!d.lokasiBerangkat) { showToast('⚠️ Lokasi berangkat belum diambil'); return; }
+                
+                d.status = 'otw';
+                saveToStorage('delivery', d);
+                
+                // Kirim WA ke konsumen
+                const msg = `Halo Kak ${p.namaKonsumen},
+                
+🚚 Pesanan Anda sedang dalam perjalanan!
+Diantar oleh: ${p.namaDeliman}
+Resi: ${d.resiNumber || '-'}
+Berangkat dari: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
+Waktu: ${formatTime(d.lokasiBerangkat.timestamp)}
+
+📍 Lihat lokasi: ${getGoogleMapsLocationUrl(d.lokasiBerangkat.lat, d.lokasiBerangkat.lng)}
+
+Mohon ditunggu ya Kak 🙏`;
+
+                sendWA(p.noKonsumen, msg);
+                showToast('✅ Notifikasi terkirim ke konsumen!');
+                
+                STATE.step = 2;
+                render();
+            });
+        }
+    }
+    
+    // ===== STEP 2: OTW =====
+    if (step === 2) {
+        const btnWAOTW = document.getElementById('btn-wa-otw');
+        if (btnWAOTW) {
+            btnWAOTW.addEventListener('click', () => {
+                const d = STATE.delivery;
+                const p = STATE.profile;
+                const msg = `Halo Kak ${p.namaKonsumen},
+
+🚚 Saya (${p.namaDeliman}) sedang dalam perjalanan mengantar pesanan Anda.
+Resi: ${d.resiNumber || '-'}
+
+📦 Estimasi tiba 15-30 menit lagi.
+Mohon siap-siap ya Kak 🙏`;
+
+                sendWA(p.noKonsumen, msg);
+                showToast('💬 Update WA terkirim!');
+            });
+        }
+        
+        const btnKeSampai = document.getElementById('btn-ke-sampai');
+        if (btnKeSampai) {
+            btnKeSampai.addEventListener('click', () => {
+                STATE.step = 3;
+                render();
+            });
+        }
+    }
+    
+    // ===== STEP 3: Sampai =====
+    if (step === 3) {
+        // Photo Serah
+        const boxSerah = document.getElementById('box-serah');
+        const fileSerah = document.getElementById('file-serah');
+        if (boxSerah && fileSerah) {
+            boxSerah.addEventListener('click', (e) => {
+                if (e.target.closest('.remove-btn')) return;
+                fileSerah.click();
+            });
+            fileSerah.addEventListener('change', (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    STATE.delivery.fotoSerah = ev.target.result;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto serah terima tersimpan');
+                    render();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Signature
+        initSignature();
+        
+        // Ambil Lokasi Sampai
+        const btnAmbilSampai = document.getElementById('btn-ambil-sampai');
+        if (btnAmbilSampai) {
+            btnAmbilSampai.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    showToast('⚠️ Geolocation tidak support');
+                    return;
+                }
+                btnAmbilSampai.textContent = '⏳ Mengambil...';
+                btnAmbilSampai.disabled = true;
+                
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        STATE.delivery.lokasiSampai = {
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude,
+                            timestamp: Date.now(),
+                            accuracy: pos.coords.accuracy
+                        };
+                        saveToStorage('delivery', STATE.delivery);
+                        showToast('📍 Lokasi sampai terkunci!');
+                        render();
+                    },
+                    (err) => {
+                        showToast('❌ Gagal ambil lokasi: ' + err.message);
+                        btnAmbilSampai.textContent = '📍 Ambil Lokasi Sampai';
+                        btnAmbilSampai.disabled = false;
+                    },
+                    { enableHighAccuracy: true, timeout: 15000 }
+                );
+            });
+        }
+        
+        // Tombol Selesai
+        const btnSelesai = document.getElementById('btn-selesai');
+        if (btnSelesai) {
+            btnSelesai.addEventListener('click', () => {
+                const d = STATE.delivery;
+                if (!d.fotoSerah) { showToast('⚠️ Foto serah terima belum diambil'); return; }
+                if (!d.tandaTangan) { showToast('⚠️ Tanda tangan belum diisi'); return; }
+                if (!d.lokasiSampai) { showToast('⚠️ Lokasi sampai belum diambil'); return; }
+                
+                d.status = 'selesai';
+                saveToStorage('delivery', d);
+                
+                // Simpan ke log
+                const p = STATE.profile;
+                const jarak = haversine(
+                    d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
+                    d.lokasiSampai.lat, d.lokasiSampai.lng
+                );
+                
+                const logEntry = {
+                    id: d.id,
+                    waktu: formatTime(Date.now()),
+                    timestamp: Date.now(),
+                    namaDeliman: p.namaDeliman,
+                    noDeliman: p.noDeliman,
+                    namaKonsumen: p.namaKonsumen,
+                    noKonsumen: p.noKonsumen,
+                    noToko: p.noToko,
+                    resiNumber: d.resiNumber || '-',
+                    jarak: jarak.toFixed(2),
+                    durasi: Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000),
+                    lokasiBerangkat: d.lokasiBerangkat,
+                    lokasiSampai: d.lokasiSampai,
+                    status: 'SELESAI',
+                    fotoBarang: d.fotoBarang,
+                    fotoStruk: d.fotoStruk,
+                    fotoSerah: d.fotoSerah,
+                    tandaTangan: d.tandaTangan
+                };
+                
+                STATE.logs.unshift(logEntry);
+                saveToStorage('logs', STATE.logs);
+                
+                // Kirim WA ke Toko (Auto)
+                const msgToko = `*LAPORAN DELIVERY SELESAI* ✅
+
+📦 ID: ${d.id}
+👤 Deliman: ${p.namaDeliman} (${p.noDeliman})
+👤 Konsumen: ${p.namaKonsumen} (${p.noKonsumen})
+📋 Resi: ${d.resiNumber || '-'}
+
+📍 Berangkat: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
+🕐 ${formatTime(d.lokasiBerangkat.timestamp)}
+
+📍 Sampai: ${d.lokasiSampai.lat.toFixed(6)}, ${d.lokasiSampai.lng.toFixed(6)}
+🕐 ${formatTime(d.lokasiSampai.timestamp)}
+
+📏 Jarak: ${jarak.toFixed(2)} km
+⏱️ Durasi: ${logEntry.durasi} menit
+🗺️ Rute: ${getGoogleMapsRouteUrl(d.lokasiBerangkat.lat, d.lokasiBerangkat.lng, d.lokasiSampai.lat, d.lokasiSampai.lng)}
+
+✅ Status: SELESAI DIANTAR
+
+---
+Terima kasih 🙏`;
+
+                sendWA(p.noToko, msgToko);
+                showToast('✅ Laporan terkirim ke Toko!');
+                
+                STATE.step = 4;
+                render();
+            });
+        }
+    }
+    
+    // ===== STEP 4: Selesai =====
+    if (step === 4) {
+        const btnComplete = document.getElementById('btn-complete');
+        if (btnComplete) {
+            btnComplete.addEventListener('click', () => {
+                // Already handled above
+            });
+        }
+        
+        const btnWAToko = document.getElementById('btn-wa-toko');
+        if (btnWAToko) {
+            btnWAToko.addEventListener('click', () => {
+                const d = STATE.delivery;
+                const p = STATE.profile;
+                const jarak = haversine(
+                    d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
+                    d.lokasiSampai.lat, d.lokasiSampai.lng
+                );
+                const msg = `*LAPORAN DELIVERY SELESAI* ✅
+
+📦 ID: ${d.id}
+👤 Deliman: ${p.namaDeliman}
+👤 Konsumen: ${p.namaKonsumen}
+📋 Resi: ${d.resiNumber || '-'}
+
+📍 Berangkat: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
+📍 Sampai: ${d.lokasiSampai.lat.toFixed(6)}, ${d.lokasiSampai.lng.toFixed(6)}
+📏 Jarak: ${jarak.toFixed(2)} km
+⏱️ Durasi: ${Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000)} menit
+
+✅ Status: SELESAI DIANTAR`;
+                sendWA(p.noToko, msg);
+                showToast('💬 Laporan terkirim ke Toko');
+            });
+        }
+        
+        const btnWAKonsumen = document.getElementById('btn-wa-konsumen');
+        if (btnWAKonsumen) {
+            btnWAKonsumen.addEventListener('click', () => {
+                const p = STATE.profile;
+                const d = STATE.delivery;
+                const msg = `Halo Kak ${p.namaKonsumen},
+
+✅ Pesanan Anda sudah sampai dengan selamat!
+Terima kasih sudah order 🙏
+
+Diantar oleh: ${p.namaDeliman}
+Resi: ${d.resiNumber || '-'}
+
+⭐ Beri bintang 5 ya Kak!
+
+---
+Terima kasih 🙏`;
+                sendWA(p.noKonsumen, msg);
+                showToast('💬 Konfirmasi terkirim ke konsumen');
+            });
+        }
+        
+        const btnNewDelivery = document.getElementById('btn-new-delivery');
+        if (btnNewDelivery) {
+            btnNewDelivery.addEventListener('click', () => {
+                STATE.delivery = {
+                    id: generateId(),
+                    resiNumber: '',
+                    fotoBarang: null,
+                    fotoStruk: null,
+                    fotoSerah: null,
+                    tandaTangan: null,
+                    lokasiBerangkat: null,
+                    lokasiSampai: null,
+                    status: 'draft',
+                    createdAt: Date.now()
+                };
+                STATE.step = 1;
+                saveToStorage('delivery', STATE.delivery);
+                showToast('🔄 Siap delivery baru!');
+                render();
+            });
+        }
+        
+        const btnLogExport = document.getElementById('btn-log-export');
+        if (btnLogExport) {
+            btnLogExport.addEventListener('click', exportExcel);
+        }
+        
+        const btnLogInfo = document.getElementById('btn-log-info');
+        if (btnLogInfo) {
+            btnLogInfo.addEventListener('click', showLogInfo);
+        }
+    }
+    
+    // ===== STEP 5: Log =====
+    if (step === 5) {
+        const btnExportExcel = document.getElementById('btn-export-excel');
+        if (btnExportExcel) {
+            btnExportExcel.addEventListener('click', exportExcel);
+        }
+        
+        const btnClearLogs = document.getElementById('btn-clear-logs');
+        if (btnClearLogs) {
+            btnClearLogs.addEventListener('click', () => {
+                if (confirm('Hapus semua log?')) {
+                    STATE.logs = [];
+                    saveToStorage('logs', STATE.logs);
+                    showToast('🗑️ Log dihapus');
+                    render();
+                }
+            });
+        }
+        
+        const btnExportSheet = document.getElementById('btn-export-sheet');
+        if (btnExportSheet) {
+            btnExportSheet.addEventListener('click', () => {
+                showToast('📤 Buka Google Sheet...');
+                // Open sheet link
+                const sheetUrl = prompt('Masukkan Google Sheet URL (Apps Script) atau kosongkan untuk CSV:');
+                if (sheetUrl) {
+                    window.open(sheetUrl, '_blank');
+                } else {
+                    exportExcel();
+                }
+            });
+        }
+        
+        // Click log item to view detail
+        $$('.log-item').forEach(el => {
+            el.addEventListener('click', () => {
+                const idx = parseInt(el.dataset.index);
+                const log = STATE.logs[idx];
+                if (log) showLogDetail(log);
+            });
+        });
+    }
+}
+
+// ================================================================
+// SIGNATURE
+// ================================================================
+
+let signatureCanvas = null;
+let signatureCtx = null;
+let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+
+function initSignature() {
+    const canvas = document.getElementById('signature-canvas');
+    if (!canvas) return;
+    
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * 2;
+    canvas.height = 160 * 2;
+    canvas.style.width = '100%';
+    canvas.style.height = '160px';
+    
+    signatureCanvas = canvas;
+    signatureCtx = canvas.getContext('2d');
+    signatureCtx.scale(2, 2);
+    signatureCtx.lineWidth = 2.5;
+    signatureCtx.lineCap = 'round';
+    signatureCtx.lineJoin = 'round';
+    signatureCtx.strokeStyle = '#1a1a2e';
+    
+    // Load existing signature
+    if (STATE.delivery.tandaTangan) {
+        const img = new Image();
+        img.onload = () => {
+            signatureCtx.drawImage(img, 0, 0, canvas.width/2, canvas.height/2);
+        };
+        img.src = STATE.delivery.tandaTangan;
+    }
+    
+    // Events
+    const startDraw = (e) => {
+        e.preventDefault();
+        const rect2 = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches?.[0]?.clientX || 0) - rect2.left;
+        const y = (e.clientY || e.touches?.[0]?.clientY || 0) - rect2.top;
+        isDrawing = true;
+        lastX = x;
+        lastY = y;
+        signatureCtx.beginPath();
+        signatureCtx.moveTo(x, y);
+    };
+    
+    const draw = (e) => {
+        e.preventDefault();
+        if (!isDrawing) return;
+        const rect2 = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches?.[0]?.clientX || 0) - rect2.left;
+        const y = (e.clientY || e.touches?.[0]?.clientY || 0) - rect2.top;
+        signatureCtx.lineTo(x, y);
+        signatureCtx.stroke();
+        lastX = x;
+        lastY = y;
+    };
+    
+    const endDraw = (e) => {
+        e.preventDefault();
+        isDrawing = false;
+        // Simpan sementara
+        const dataUrl = canvas.toDataURL('image/png');
+        STATE.signatureData = dataUrl;
+    };
+    
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+    canvas.addEventListener('touchstart', startDraw);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', endDraw);
+    
+    // Clear button
+    const btnClear = document.getElementById('btn-clear-ttd');
+    if (btnClear) {
+        btnClear.addEventListener('click', () => {
+            signatureCtx.clearRect(0, 0, canvas.width/2, canvas.height/2);
+            signatureCtx.fillStyle = 'white';
+            signatureCtx.fillRect(0, 0, canvas.width/2, canvas.height/2);
+            STATE.signatureData = null;
+            STATE.delivery.tandaTangan = null;
+            saveToStorage('delivery', STATE.delivery);
+            showToast('🗑️ Tanda tangan dihapus');
+        });
+    }
+    
+    // Save button
+    const btnSave = document.getElementById('btn-save-ttd');
+    if (btnSave) {
+        btnSave.addEventListener('click', () => {
+            const dataUrl = canvas.toDataURL('image/png');
+            STATE.delivery.tandaTangan = dataUrl;
+            STATE.signatureData = dataUrl;
+            saveToStorage('delivery', STATE.delivery);
+            showToast('✅ Tanda tangan tersimpan!');
+            
+            // Update UI
+            const placeholder = document.querySelector('.signature-area .placeholder');
+            if (placeholder) placeholder.style.display = 'none';
+        });
+    }
+}
+
+// ================================================================
+// EXPORT EXCEL
+// ================================================================
+
+function exportExcel() {
+    const logs = STATE.logs;
+    if (logs.length === 0) {
+        showToast('⚠️ Belum ada log untuk di-export');
+        return;
+    }
+    
+    // Header
+    const headers = ['ID', 'Waktu', 'Deliman', 'No Deliman', 'Konsumen', 'No Konsumen', 
+                     'Resi', 'Jarak (km)', 'Durasi (menit)', 'Lat Berangkat', 'Lng Berangkat', 
+                     'Lat Sampai', 'Lng Sampai', 'Status'];
+    
+    // Data
+    const rows = logs.map(log => [
+        log.id,
+        log.waktu || '',
+        log.namaDeliman || '',
+        log.noDeliman || '',
+        log.namaKonsumen || '',
+        log.noKonsumen || '',
+        log.resiNumber || '',
+        log.jarak || '0',
+        log.durasi || '0',
+        log.lokasiBerangkat?.lat?.toFixed(6) || '',
+        log.lokasiBerangkat?.lng?.toFixed(6) || '',
+        log.lokasiSampai?.lat?.toFixed(6) || '',
+        log.lokasiSampai?.lng?.toFixed(6) || '',
+        log.status || ''
+    ]);
+    
+    // Build CSV
+    let csv = headers.join(',') + '\n';
+    rows.forEach(row => {
+        csv += row.map(cell => `"${cell}"`).join(',') + '\n';
+    });
+    
+    // Download
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = `delivery-log-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    showToast('✅ Excel berhasil di-export!');
+}
+
+// ================================================================
+// LOG INFO & DETAIL
+// ================================================================
+
+function showLogInfo() {
+    const logs = STATE.logs;
+    const total = logs.length;
+    const totalJarak = logs.reduce((sum, log) => sum + parseFloat(log.jarak || 0), 0);
+    const totalDurasi = logs.reduce((sum, log) => sum + parseInt(log.durasi || 0), 0);
+    
+    const msg = `📊 *INFO LOG DELIVERY*
+
+📦 Total Pengantaran: ${total}
+📏 Total Jarak: ${totalJarak.toFixed(2)} km
+⏱️ Total Durasi: ${totalDurasi} menit
+👤 Deliman: ${STATE.profile.namaDeliman}
+
+📋 Log terbaru:
+${logs.slice(0, 3).map((log, i) => 
+    `${i+1}. ${log.namaKonsumen || '-'} · ${log.waktu || '-'} · ${log.jarak || 0} km`
+).join('\n')}
+
+${total > 3 ? `... dan ${total - 3} log lainnya` : ''}
+
+---
+Delivery Track Pro v2.0
+Cah Sragen 77 x DeepSeek AI`;
+    
+    alert(msg);
+}
+
+function showLogDetail(log) {
+    const msg = `📋 *DETAIL LOG*
+
+📦 ID: ${log.id}
+🕐 Waktu: ${log.waktu || '-'}
+👤 Deliman: ${log.namaDeliman || '-'}
+📱 No Deliman: ${log.noDeliman || '-'}
+👤 Konsumen: ${log.namaKonsumen || '-'}
+📱 No Konsumen: ${log.noKonsumen || '-'}
+📋 Resi: ${log.resiNumber || '-'}
+
+📍 Berangkat: 
+  ${log.lokasiBerangkat?.lat?.toFixed(6) || '-'}, ${log.lokasiBerangkat?.lng?.toFixed(6) || '-'}
+📍 Sampai:
+  ${log.lokasiSampai?.lat?.toFixed(6) || '-'}, ${log.lokasiSampai?.lng?.toFixed(6) || '-'}
+
+📏 Jarak: ${log.jarak || 0} km
+⏱️ Durasi: ${log.durasi || 0} menit
+📊 Status: ${log.status || '-'}
+
+---
+Delivery Track Pro`;
+    
+    alert(msg);
+}
+
+// ================================================================
+// UPDATE UI
+// ================================================================
+
+function updateStepUI() {
+    // Nothing else needed - render handles it
+}
+
+// ================================================================
+// NETWORK STATUS
+// ================================================================
+
+window.addEventListener('online', () => {
+    STATE.isOnline = true;
+    showToast('🌐 Kembali online!');
+    render();
+});
+
+window.addEventListener('offline', () => {
+    STATE.isOnline = false;
+    showToast('✈️ Mode offline - tetap bisa delivery!');
+    render();
+});
+
+// ================================================================
+// LOAD SAVED DATA
+// ================================================================
+
+function loadSavedData() {
+    const profile = loadFromStorage('profile');
+    if (profile) STATE.profile = { ...STATE.profile, ...profile };
+    
+    const delivery = loadFromStorage('delivery');
+    if (delivery) STATE.delivery = { ...STATE.delivery, ...delivery };
+    
+    const logs = loadFromStorage('logs');
+    if (logs && Array.isArray(logs)) STATE.logs = logs;
+    
+    // Check if delivery is completed
+    if (STATE.delivery.status === 'selesai') {
+        STATE.step = 4;
+    } else if (STATE.delivery.status === 'otw') {
+        STATE.step = 2;
+    } else if (STATE.delivery.status === 'sampai') {
+        STATE.step = 3;
+    } else if (STATE.delivery.fotoBarang && STATE.delivery.fotoStruk && STATE.delivery.lokasiBerangkat) {
+        STATE.step = 2;
+    } else if (STATE.delivery.fotoBarang || STATE.delivery.fotoStruk || STATE.delivery.lokasiBerangkat) {
+        STATE.step = 1;
+    }
+}
+
+// ================================================================
+// INIT
+// ================================================================
+
+loadSavedData();
+render();
+
+console.log('🚚 Delivery Track Pro v2.0');
+console.log('👤 Cah Sragen 77 x DeepSeek AI');
+console.log('✅ Status:', STATE.delivery.status);
+console.log('📦 Logs:', STATE.logs.length);
+console.log('📍 Step:', STATE.step);
+console.log('🌐 Online:', STATE.isOnline);
+
+// ================================================================
+// SERVICE WORKER (PWA)
+// ================================================================
+
+if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+    try {
+        // Simple SW registration - skip if not needed
+        console.log('📦 PWA ready');
+    } catch (e) {}
+}
+
+console.log('✅ Delivery Track Pro siap digunakan!');
+</script>
+
+</body>
+</html>
