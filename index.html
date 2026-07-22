@@ -1353,11 +1353,20 @@ function renderStepLog() {
                 <span style="margin-left:auto;font-size:12px;background:#e8ecf1;padding:2px 12px;border-radius:12px;">${logs.length} log</span>
             </div>
             
-            <div style="margin-bottom:12px;display:flex;gap:8px;">
-                <button id="btn-export-excel" class="btn btn-sm btn-outline" style="flex:1;">📊 Export Excel</button>
-                <button id="btn-export-sheet" class="btn btn-sm btn-black" style="flex:1;">📤 Google Sheet</button>
-                <button id="btn-clear-logs" class="btn btn-sm btn-danger" style="flex:1;">🗑️ Hapus</button>
-            </div>
+            <div style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;">
+    <button id="btn-export-excel" class="btn btn-sm btn-outline" style="flex:1;min-width:100px;">
+        📊 Export CSV
+    </button>
+    <button id="btn-export-sheets" class="btn btn-sm btn-success" style="flex:1;min-width:100px;">
+        📤 Google Sheets
+    </button>
+    <button id="btn-export-html" class="btn btn-sm btn-black" style="flex:1;min-width:100px;">
+        📋 Copy ke Sheets
+    </button>
+    <button id="btn-clear-logs" class="btn btn-sm btn-danger" style="flex:1;min-width:100px;">
+        🗑️ Hapus
+    </button>
+</div>
             
             ${logs.map((log, i) => `
                 <div class="log-item" data-index="${i}">
@@ -1371,6 +1380,27 @@ function renderStepLog() {
             `).join('')}
         </div>
     `;
+}
+
+    // Di attachMainEvents(), bagian step === 5 tambahkan:
+
+const btnExportSheets = document.getElementById('btn-export-sheets');
+if (btnExportSheets) {
+    btnExportSheets.addEventListener('click', () => {
+        const url = prompt('📤 Masukkan URL Google Sheets (kosongkan untuk buka baru):');
+        if (url) {
+            window.open(url, '_blank');
+            showToast('📤 Buka Sheets, paste data dari tab lain');
+        } else {
+            window.open('https://sheets.google.com', '_blank');
+            showToast('📤 Buka Sheets baru, paste data dari export HTML');
+        }
+    });
+}
+
+const btnExportHTML = document.getElementById('btn-export-html');
+if (btnExportHTML) {
+    btnExportHTML.addEventListener('click', exportToGoogleSheets);
 }
 
 // ================================================================
@@ -1953,58 +1983,67 @@ function initSignature() {
     }
 }
 
+
 // ================================================================
-// EXPORT EXCEL
+// EXPORT KE GOOGLE SHEETS (FIX)
 // ================================================================
 
-function exportExcel() {
+function exportToGoogleSheets() {
     const logs = STATE.logs;
     if (logs.length === 0) {
         showToast('⚠️ Belum ada log untuk di-export');
         return;
     }
     
+    // Buat format HTML untuk Google Sheets
+    let html = '<html><head><meta charset="UTF-8"></head><body><table border="1">';
+    
     // Header
-    const headers = ['ID', 'Waktu', 'Deliman', 'No Deliman', 'Konsumen', 'No Konsumen', 
-                     'Resi', 'Jarak (km)', 'Durasi (menit)', 'Lat Berangkat', 'Lng Berangkat', 
-                     'Lat Sampai', 'Lng Sampai', 'Status'];
+    html += '<tr>';
+    ['ID', 'Waktu', 'Deliman', 'No Deliman', 'Konsumen', 'No Konsumen', 
+     'Resi', 'Jarak (km)', 'Durasi (menit)', 'Lat Berangkat', 'Lng Berangkat', 
+     'Lat Sampai', 'Lng Sampai', 'Status'].forEach(h => {
+        html += `<th>${h}</th>`;
+    });
+    html += '</tr>';
     
     // Data
-    const rows = logs.map(log => [
-        log.id,
-        log.waktu || '',
-        log.namaDeliman || '',
-        log.noDeliman || '',
-        log.namaKonsumen || '',
-        log.noKonsumen || '',
-        log.resiNumber || '',
-        log.jarak || '0',
-        log.durasi || '0',
-        log.lokasiBerangkat?.lat?.toFixed(6) || '',
-        log.lokasiBerangkat?.lng?.toFixed(6) || '',
-        log.lokasiSampai?.lat?.toFixed(6) || '',
-        log.lokasiSampai?.lng?.toFixed(6) || '',
-        log.status || ''
-    ]);
-    
-    // Build CSV
-    let csv = headers.join(',') + '\n';
-    rows.forEach(row => {
-        csv += row.map(cell => `"${cell}"`).join(',') + '\n';
+    logs.forEach(log => {
+        html += '<tr>';
+        html += `<td>${log.id || ''}</td>`;
+        html += `<td>${log.waktu || ''}</td>`;
+        html += `<td>${log.namaDeliman || ''}</td>`;
+        html += `<td>${log.noDeliman || ''}</td>`;
+        html += `<td>${log.namaKonsumen || ''}</td>`;
+        html += `<td>${log.noKonsumen || ''}</td>`;
+        html += `<td>${log.resiNumber || ''}</td>`;
+        html += `<td>${log.jarak || '0'}</td>`;
+        html += `<td>${log.durasi || '0'}</td>`;
+        html += `<td>${log.lokasiBerangkat?.lat?.toFixed(6) || ''}</td>`;
+        html += `<td>${log.lokasiBerangkat?.lng?.toFixed(6) || ''}</td>`;
+        html += `<td>${log.lokasiSampai?.lat?.toFixed(6) || ''}</td>`;
+        html += `<td>${log.lokasiSampai?.lng?.toFixed(6) || ''}</td>`;
+        html += `<td>${log.status || ''}</td>`;
+        html += '</tr>';
     });
     
-    // Download
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.href = url;
-    link.download = `delivery-log-${new Date().toISOString().slice(0,10)}.csv`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    html += '</table></body></html>';
     
-    showToast('✅ Excel berhasil di-export!');
+    // Buka di tab baru -> copy paste ke Google Sheets
+    const win = window.open('', '_blank');
+    if (win) {
+        win.document.write(html);
+        win.document.close();
+        showToast('✅ Copy tabel, paste ke Google Sheets!');
+    } else {
+        // Fallback: download HTML
+        const blob = new Blob([html], { type: 'text/html' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `delivery-log-${new Date().toISOString().slice(0,10)}.html`;
+        link.click();
+        showToast('✅ Download HTML, buka di browser lalu copy ke Sheets');
+    }
 }
 
 // ================================================================
