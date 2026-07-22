@@ -1,24 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#16a34a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Delivery Track Pro - Cah Sragen</title>
     
     <style>
-        /* ============================================
-           STYLE LENGKAP
-           ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: #f0f2f5;
@@ -26,15 +15,9 @@
             min-height: 100vh;
             padding-bottom: 20px;
         }
+        .app-container { max-width: 480px; margin: 0 auto; padding: 16px; }
         
-        /* ===== Container ===== */
-        .app-container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-        
-        /* ===== Header ===== */
+        /* ===== HEADER ===== */
         .header {
             background: linear-gradient(135deg, #0f1724 0%, #1a2a3a 100%);
             border-radius: 20px;
@@ -43,66 +26,30 @@
             margin-bottom: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.15);
         }
-        
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .header-title {
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-        }
-        
-        .header-title span {
-            color: #4ade80;
-        }
-        
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .header-title { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
+        .header-title span { color: #4ade80; }
         .header-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 11px;
-            font-weight: 700;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11px; font-weight: 700;
             background: rgba(255,255,255,0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 4px 12px; border-radius: 20px;
         }
-        
         .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            width: 8px; height: 8px; border-radius: 50%;
             display: inline-block;
             animation: pulse-dot 2s infinite;
         }
-        
-        .status-dot.online {
-            background: #4ade80;
-        }
-        
-        .status-dot.offline {
-            background: #f87171;
-        }
-        
+        .status-dot.online { background: #4ade80; }
+        .status-dot.offline { background: #f87171; }
         @keyframes pulse-dot {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
         }
+        .header-deliman { margin-top: 12px; font-size: 14px; opacity: 0.8; }
+        .header-deliman strong { color: #4ade80; }
         
-        .header-deliman {
-            margin-top: 12px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
-        .header-deliman strong {
-            color: #4ade80;
-        }
-        
-        /* ===== Card ===== */
+        /* ===== CARD ===== */
         .card {
             background: white;
             border-radius: 16px;
@@ -111,283 +58,134 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             border: 1px solid rgba(0,0,0,0.04);
         }
-        
         .card-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 14px; font-weight: 700; color: #1a1a2e;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
         }
+        .card-title .icon { font-size: 18px; }
         
-        .card-title .icon {
-            font-size: 18px;
-        }
-        
-        /* ===== Form ===== */
-        .form-group {
-            margin-bottom: 14px;
-        }
-        
+        /* ===== FORM ===== */
+        .form-group { margin-bottom: 14px; }
         .form-label {
-            display: block;
-            font-size: 12px;
-            font-weight: 700;
-            color: #4a4a6a;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: block; font-size: 12px; font-weight: 700;
+            color: #4a4a6a; margin-bottom: 4px;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
-        
         .form-input {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid #e8ecf1;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 500;
-            outline: none;
-            transition: all 0.2s;
+            width: 100%; padding: 12px 14px;
+            border: 2px solid #e8ecf1; border-radius: 12px;
+            font-size: 15px; font-weight: 500;
+            outline: none; transition: all 0.2s;
             background: #fafbfc;
         }
-        
         .form-input:focus {
             border-color: #16a34a;
             background: white;
             box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1);
         }
+        .form-input:disabled { opacity: 0.6; cursor: not-allowed; }
         
-        .form-input:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
-        /* ===== Buttons ===== */
+        /* ===== BUTTONS ===== */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 100%;
-            text-decoration: none;
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 8px; padding: 14px 24px; border: none;
+            border-radius: 12px; font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
+            width: 100%; text-decoration: none;
             touch-action: manipulation;
         }
-        
-        .btn:active {
-            transform: scale(0.97);
-        }
-        
+        .btn:active { transform: scale(0.97); }
         .btn-primary {
-            background: #16a34a;
-            color: white;
+            background: #16a34a; color: white;
             box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
         }
-        
-        .btn-primary:hover {
-            background: #15803d;
-        }
-        
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
+        .btn-primary:hover { background: #15803d; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .btn-success {
-            background: #25D366;
-            color: white;
+            background: #25D366; color: white;
             box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
         }
-        
-        .btn-success:hover {
-            background: #1da851;
-        }
-        
-        .btn-black {
-            background: #1a1a2e;
-            color: white;
-        }
-        
-        .btn-black:hover {
-            background: #2a2a4e;
-        }
-        
+        .btn-success:hover { background: #1da851; }
+        .btn-black { background: #1a1a2e; color: white; }
+        .btn-black:hover { background: #2a2a4e; }
         .btn-outline {
-            background: transparent;
-            border: 2px solid #e8ecf1;
-            color: #1a1a2e;
+            background: transparent; border: 2px solid #e8ecf1; color: #1a1a2e;
         }
+        .btn-outline:hover { border-color: #16a34a; color: #16a34a; }
+        .btn-danger { background: #ef4444; color: white; }
+        .btn-sm { padding: 10px 16px; font-size: 12px; }
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
-        .btn-outline:hover {
-            border-color: #16a34a;
-            color: #16a34a;
-        }
-        
-        .btn-danger {
-            background: #ef4444;
-            color: white;
-        }
-        
-        .btn-sm {
-            padding: 10px 16px;
-            font-size: 12px;
-        }
-        
-        .btn-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        /* ===== Step Indicator ===== */
+        /* ===== STEPS ===== */
         .steps {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 20px;
             padding: 0 4px;
         }
-        
         .step-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            flex: 1;
-            position: relative;
-            cursor: pointer;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 4px;
+            flex: 1; position: relative; cursor: pointer;
         }
-        
         .step-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px;
             border: 3px solid #e8ecf1;
-            background: white;
-            color: #a0a0b8;
-            transition: all 0.3s;
-            position: relative;
-            z-index: 1;
+            background: white; color: #a0a0b8;
+            transition: all 0.3s; position: relative; z-index: 1;
         }
-        
         .step-circle.active {
-            border-color: #16a34a;
-            background: #16a34a;
-            color: white;
-            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
+            border-color: #16a34a; background: #16a34a;
+            color: white; box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
         }
-        
         .step-circle.done {
-            border-color: #16a34a;
-            background: #16a34a;
-            color: white;
+            border-color: #16a34a; background: #16a34a; color: white;
         }
-        
         .step-label {
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #a0a0b8;
-            letter-spacing: 0.5px;
+            font-size: 9px; font-weight: 700; text-transform: uppercase;
+            color: #a0a0b8; letter-spacing: 0.5px;
         }
-        
-        .step-label.active {
-            color: #16a34a;
-        }
-        
+        .step-label.active { color: #16a34a; }
         .step-line {
-            flex: 1;
-            height: 3px;
-            background: #e8ecf1;
-            margin: 0 -4px;
-            position: relative;
-            top: -20px;
-            z-index: 0;
+            flex: 1; height: 3px; background: #e8ecf1;
+            margin: 0 -4px; position: relative;
+            top: -20px; z-index: 0;
         }
+        .step-line.done { background: #16a34a; }
         
-        .step-line.done {
-            background: #16a34a;
-        }
-        
-        /* ===== Photo Upload ===== */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        
+        /* ===== PHOTO ===== */
+        .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .photo-box {
             aspect-ratio: 4/3;
             border: 2px dashed #d1d5db;
             border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #fafbfc;
-            overflow: hidden;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s;
+            background: #fafbfc; overflow: hidden;
             position: relative;
         }
-        
         .photo-box.has-photo {
-            border-color: #16a34a;
-            border-style: solid;
+            border-color: #16a34a; border-style: solid;
             background: #f0fdf4;
         }
-        
-        .photo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
         .photo-box .placeholder {
-            font-size: 11px;
-            color: #9ca3af;
-            text-align: center;
-            padding: 8px;
+            font-size: 11px; color: #9ca3af;
+            text-align: center; padding: 8px;
         }
-        
-        .photo-box .placeholder .big-icon {
-            font-size: 32px;
-            display: block;
-            margin-bottom: 4px;
-        }
-        
+        .photo-box .placeholder .big-icon { font-size: 32px; display: block; margin-bottom: 4px; }
         .photo-box .remove-btn {
-            position: absolute;
-            top: 4px;
-            right: 4px;
+            position: absolute; top: 4px; right: 4px;
             background: rgba(239, 68, 68, 0.9);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: white; border: none; border-radius: 50%;
+            width: 24px; height: 24px; font-size: 12px;
+            cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
         }
         
-        /* ===== Location Info ===== */
+        /* ===== LOCATION ===== */
         .location-card {
             background: #0f1724;
             border-radius: 12px;
@@ -395,28 +193,19 @@
             color: white;
             margin-top: 12px;
         }
-        
         .location-card .label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.6;
+            font-size: 10px; text-transform: uppercase;
+            letter-spacing: 1px; opacity: 0.6;
             font-weight: 700;
         }
-        
         .location-card .coords {
             font-family: 'Courier New', monospace;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 14px; font-weight: 600;
             margin: 4px 0;
         }
+        .location-card .time { font-size: 12px; opacity: 0.6; }
         
-        .location-card .time {
-            font-size: 12px;
-            opacity: 0.6;
-        }
-        
-        /* ===== Signature ===== */
+        /* ===== SIGNATURE ===== */
         .signature-area {
             border: 2px dashed #d1d5db;
             border-radius: 12px;
@@ -427,265 +216,135 @@
             position: relative;
             overflow: hidden;
         }
-        
         .signature-area canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-            touch-action: none;
+            width: 100%; height: 100%;
+            display: block; touch-action: none;
         }
-        
         .signature-area .placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            color: #9ca3af;
-            font-size: 13px;
+            color: #9ca3af; font-size: 13px;
             pointer-events: none;
         }
-        
         .signature-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            display: flex; gap: 10px; margin-top: 10px;
         }
+        .signature-actions .btn { flex: 1; }
         
-        .signature-actions .btn {
-            flex: 1;
-        }
-        
-        /* ===== Log ===== */
+        /* ===== LOG ===== */
         .log-item {
-            display: flex;
-            gap: 12px;
-            padding: 12px;
-            background: #f8fafc;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            border-left: 4px solid #16a34a;
-            cursor: pointer;
-            transition: all 0.2s;
+            display: flex; gap: 12px; padding: 12px;
+            background: #f8fafc; border-radius: 12px;
+            margin-bottom: 8px; border-left: 4px solid #16a34a;
+            cursor: pointer; transition: all 0.2s;
         }
-        
-        .log-item:hover {
-            background: #f1f5f9;
-        }
-        
+        .log-item:hover { background: #f1f5f9; }
         .log-item .log-date {
-            font-size: 11px;
-            color: #6b7280;
-            font-weight: 600;
-            min-width: 70px;
+            font-size: 11px; color: #6b7280;
+            font-weight: 600; min-width: 70px;
         }
-        
-        .log-item .log-info {
-            flex: 1;
-        }
-        
-        .log-item .log-info .name {
-            font-weight: 700;
-            font-size: 14px;
-        }
-        
-        .log-item .log-info .detail {
-            font-size: 12px;
-            color: #6b7280;
-        }
-        
+        .log-item .log-info { flex: 1; }
+        .log-item .log-info .name { font-weight: 700; font-size: 14px; }
+        .log-item .log-info .detail { font-size: 12px; color: #6b7280; }
         .log-item .log-status {
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 20px;
-            background: #dcfce7;
-            color: #16a34a;
+            font-size: 10px; font-weight: 700;
+            padding: 2px 10px; border-radius: 20px;
+            background: #dcfce7; color: #16a34a;
             align-self: center;
         }
         
-        /* ===== Footer ===== */
+        /* ===== FOOTER ===== */
         .footer {
-            text-align: center;
-            padding: 24px 16px 8px;
-            font-size: 12px;
-            color: #6b7280;
-            border-top: 1px solid #e8ecf1;
-            margin-top: 16px;
+            text-align: center; padding: 24px 16px 8px;
+            font-size: 12px; color: #6b7280;
+            border-top: 1px solid #e8ecf1; margin-top: 16px;
         }
-        
-        .footer .heart {
-            color: #ef4444;
-        }
-        
-        .footer .name {
-            color: #1a1a2e;
-            font-weight: 700;
-        }
-        
+        .footer .heart { color: #ef4444; }
+        .footer .name { color: #1a1a2e; font-weight: 700; }
         .footer .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 8px;
+            display: flex; flex-wrap: wrap;
+            justify-content: center; gap: 6px; margin-top: 8px;
         }
-        
         .footer .social-links a {
-            color: #6b7280;
-            text-decoration: none;
-            font-size: 11px;
-            padding: 2px 10px;
-            border-radius: 12px;
-            background: #f1f5f9;
-            transition: all 0.2s;
+            color: #6b7280; text-decoration: none; font-size: 11px;
+            padding: 2px 10px; border-radius: 12px;
+            background: #f1f5f9; transition: all 0.2s;
         }
-        
-        .footer .social-links a:hover {
-            background: #16a34a;
-            color: white;
-        }
-        
+        .footer .social-links a:hover { background: #16a34a; color: white; }
         .footer .ai-credit {
-            margin-top: 10px;
-            padding: 12px;
+            margin-top: 10px; padding: 12px;
             background: linear-gradient(135deg, #0f1724, #1a2a3a);
-            border-radius: 12px;
-            color: white;
-            font-size: 11px;
+            border-radius: 12px; color: white; font-size: 11px;
         }
-        
         .footer .ai-credit .whale {
-            font-size: 28px;
-            display: inline-block;
+            font-size: 28px; display: inline-block;
             animation: swim 3s ease-in-out infinite;
         }
-        
         @keyframes swim {
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(8px); }
         }
         
-        /* ===== Modal ===== */
+        /* ===== MODAL ===== */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 16px;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; padding: 16px;
             animation: fadeIn 0.2s ease;
         }
-        
         .modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 480px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 24px;
+            background: white; border-radius: 20px;
+            max-width: 480px; width: 100%; max-height: 90vh;
+            overflow-y: auto; padding: 24px;
             animation: slideUp 0.3s ease;
         }
-        
         .modal-content .modal-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 18px; font-weight: 700; margin-bottom: 12px;
         }
-        
         .modal-content .modal-close {
-            float: right;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #6b7280;
+            float: right; background: none; border: none;
+            font-size: 24px; cursor: pointer; color: #6b7280;
         }
-        
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        
         @keyframes slideUp {
             from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
         
-        /* ===== Toast ===== */
+        /* ===== TOAST ===== */
         .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
+            position: fixed; bottom: 24px; left: 50%;
             transform: translateX(-50%);
-            background: #1a1a2e;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 14px;
-            z-index: 2000;
+            background: #1a1a2e; color: white;
+            padding: 12px 24px; border-radius: 16px;
+            font-weight: 600; font-size: 14px;
+            z-index: 2000; max-width: 90%; text-align: center;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            animation: slideUp 0.3s ease;
-            max-width: 90%;
-            text-align: center;
             border: 1px solid rgba(255,255,255,0.1);
+            animation: slideUp 0.3s ease;
         }
         
-        /* ===== Responsive ===== */
-        @media (max-width: 400px) {
-            .app-container { padding: 10px; }
-            .card { padding: 14px; }
-            .header { padding: 14px; }
-            .header-title { font-size: 18px; }
-            .photo-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-            .btn-group { grid-template-columns: 1fr; }
-            .step-circle { width: 34px; height: 34px; font-size: 12px; }
-        }
+        /* ===== HIDDEN ===== */
+        .hidden-input { display: none; }
         
-        /* ===== Scrollbar ===== */
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 4px; }
         
-        /* ===== Hidden file input ===== */
-        .hidden-input { display: none; }
-        
-        /* ===== Loading ===== */
-        .loading-spinner {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255,255,255,0.2);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            display: inline-block;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* ===== Badge ===== */
+        /* ===== BADGE ===== */
         .badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
+            display: inline-block; padding: 2px 10px;
+            border-radius: 12px; font-size: 10px; font-weight: 700;
         }
-        
         .badge-green { background: #dcfce7; color: #16a34a; }
         .badge-orange { background: #fef3c7; color: #d97706; }
-        .badge-blue { background: #dbeafe; color: #2563eb; }
         
-        /* Utility */
+        /* ===== UTILITY ===== */
         .text-center { text-align: center; }
         .mt-8 { margin-top: 8px; }
         .mt-12 { margin-top: 12px; }
@@ -697,6 +356,17 @@
         .items-center { align-items: center; }
         .justify-between { justify-content: space-between; }
         .gap-4 { gap: 4px; }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 400px) {
+            .app-container { padding: 10px; }
+            .card { padding: 14px; }
+            .header { padding: 14px; }
+            .header-title { font-size: 18px; }
+            .photo-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .btn-group { grid-template-columns: 1fr; }
+            .step-circle { width: 34px; height: 34px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
@@ -705,16 +375,15 @@
 
 <script>
 // ================================================================
-// DELIVERY TRACK PRO - FULL APPLICATION
+// DELIVERY TRACK PRO - FULL APPLICATION (FIX KAMERA)
 // Cah Sragen 77 x DeepSeek AI
 // ================================================================
 
 // ================================================================
-// STATE MANAGEMENT
+// STATE
 // ================================================================
 
 const STATE = {
-    // Profile
     profile: {
         namaDeliman: '',
         noDeliman: '',
@@ -722,8 +391,6 @@ const STATE = {
         namaKonsumen: '',
         noToko: '6281122220723'
     },
-    
-    // Current Delivery
     delivery: {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         resiNumber: '',
@@ -733,77 +400,27 @@ const STATE = {
         tandaTangan: null,
         lokasiBerangkat: null,
         lokasiSampai: null,
-        status: 'draft', // draft | otw | sampai | selesai
+        status: 'draft',
         createdAt: Date.now()
     },
-    
-    // Logs
     logs: [],
-    
-    // UI
-    step: 1, // 1=Berangkat, 2=OTW, 3=Sampai, 4=Selesai, 5=Log
+    step: 1,
     isOnline: navigator.onLine,
     toast: null,
     modal: null,
     isLoading: false,
     isDrawing: false,
-    
-    // Signature
     signatureData: null,
-    
-    // Geolocation
     watchId: null,
     currentLocation: null,
 };
 
 // ================================================================
-// DOM REFS
+// HELPERS
 // ================================================================
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
-
-// ================================================================
-// TOAST SYSTEM
-// ================================================================
-
-function showToast(message, duration = 3000) {
-    const existing = document.querySelector('.toast');
-    if (existing) existing.remove();
-    
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    
-    setTimeout(() => toast.remove(), duration);
-}
-
-// ================================================================
-// STORAGE (LocalStorage + IndexedDB)
-// ================================================================
-
-function saveToStorage(key, data) {
-    try {
-        localStorage.setItem(`delivery_${key}`, JSON.stringify(data));
-    } catch (e) {
-        console.warn('Storage save failed:', e);
-    }
-}
-
-function loadFromStorage(key) {
-    try {
-        const data = localStorage.getItem(`delivery_${key}`);
-        return data ? JSON.parse(data) : null;
-    } catch (e) {
-        console.warn('Storage load failed:', e);
-        return null;
-    }
-}
-
-// ================================================================
-// HELPERS
-// ================================================================
 
 function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -848,7 +465,45 @@ function getGoogleMapsLocationUrl(lat, lng) {
 }
 
 // ================================================================
-// WHATSAPP FUNCTIONS
+// TOAST
+// ================================================================
+
+function showToast(message, duration = 3000) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.remove(), duration);
+}
+
+// ================================================================
+// STORAGE
+// ================================================================
+
+function saveToStorage(key, data) {
+    try {
+        localStorage.setItem(`delivery_${key}`, JSON.stringify(data));
+    } catch (e) {
+        console.warn('Storage save failed:', e);
+    }
+}
+
+function loadFromStorage(key) {
+    try {
+        const data = localStorage.getItem(`delivery_${key}`);
+        return data ? JSON.parse(data) : null;
+    } catch (e) {
+        console.warn('Storage load failed:', e);
+        return null;
+    }
+}
+
+// ================================================================
+// WHATSAPP
 // ================================================================
 
 function sendWA(phone, message) {
@@ -857,19 +512,47 @@ function sendWA(phone, message) {
     window.open(url, '_blank');
 }
 
-function getWAUrl(phone, message) {
-    const p = normalizePhone(phone);
-    return `https://wa.me/${p}?text=${encodeURIComponent(message)}`;
+// ================================================================
+// FOTO KAMERA (FIX)
+// ================================================================
+
+function openCamera(inputId, callback) {
+    const input = document.getElementById(inputId);
+    if (!input) {
+        showToast('⚠️ Error: input tidak ditemukan');
+        return;
+    }
+    
+    // Cek apakah device support kamera
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Coba akses kamera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(() => {
+                // Sukses, trigger input file
+                input.click();
+            })
+            .catch((err) => {
+                console.warn('Kamera tidak bisa diakses:', err);
+                // Fallback: tetap buka file picker
+                showToast('📷 Kamera tidak bisa diakses, pilih dari galeri');
+                input.click();
+            });
+    } else {
+        // Device tidak support getUserMedia, langsung buka file picker
+        showToast('📷 Pilih foto dari galeri');
+        input.click();
+    }
 }
 
 // ================================================================
-// RENDER ENGINE
+// RENDER
 // ================================================================
 
 function render() {
     const app = document.getElementById('app');
     
-    if (!STATE.profile.namaDeliman || !STATE.profile.noDeliman || !STATE.profile.namaKonsumen || !STATE.profile.noKonsumen) {
+    if (!STATE.profile.namaDeliman || !STATE.profile.noDeliman || 
+        !STATE.profile.namaKonsumen || !STATE.profile.noKonsumen) {
         app.innerHTML = renderSetup();
         attachSetupEvents();
         return;
@@ -966,13 +649,23 @@ function renderMain() {
     const step = STATE.step;
     
     return `
-        <!-- Header -->
         <div class="header">
             <div class="header-top">
                 <div class="header-title">DELIVERY <span>PRO</span></div>
-                <div class="header-status">
-                    <span class="status-dot ${STATE.isOnline ? 'online' : 'offline'}"></span>
-                    ${STATE.isOnline ? 'ONLINE' : 'OFFLINE'}
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <button onclick="resetToSetup()" style="
+                        background:rgba(255,255,255,0.15);
+                        border:none; color:white;
+                        padding:4px 12px; border-radius:20px;
+                        font-size:10px; font-weight:700;
+                        cursor:pointer;
+                    ">
+                        🔄 Reset
+                    </button>
+                    <div class="header-status">
+                        <span class="status-dot ${STATE.isOnline ? 'online' : 'offline'}"></span>
+                        ${STATE.isOnline ? 'ONLINE' : 'OFFLINE'}
+                    </div>
                 </div>
             </div>
             <div class="header-deliman">
@@ -981,7 +674,6 @@ function renderMain() {
             </div>
         </div>
         
-        <!-- Steps -->
         <div class="steps">
             ${[
                 { id: 1, label: 'Berangkat', icon: '📦' },
@@ -1000,14 +692,12 @@ function renderMain() {
             `).join('')}
         </div>
         
-        <!-- Content -->
         ${step === 1 ? renderStepBerangkat() : ''}
         ${step === 2 ? renderStepOTW() : ''}
         ${step === 3 ? renderStepSampai() : ''}
         ${step === 4 ? renderStepSelesai() : ''}
         ${step === 5 ? renderStepLog() : ''}
         
-        <!-- Footer -->
         <div class="footer">
             <p>Handcrafted with <span class="heart">❤</span> by <span class="name">Andrew Dwiranto</span> (Cah_Sragen_77, Indonesia)</p>
             <div class="social-links">
@@ -1047,32 +737,28 @@ function renderStepBerangkat() {
         <div class="card">
             <div class="card-title"><span class="icon">📦</span> Step 1: Berangkat</div>
             
-            <!-- Resi Number -->
             <div class="form-group">
                 <label class="form-label">No Resi / Barcode (Opsional)</label>
                 <div style="display:flex;gap:8px;">
-                    <input id="input-resi" class="form-input" value="${d.resiNumber || ''}" placeholder="Ketik atau scan resi">
+                    <input id="input-resi" class="form-input" value="${d.resiNumber || ''}" placeholder="Ketik resi">
                     <button id="btn-scan" class="btn btn-sm btn-black" style="width:auto;padding:12px 16px;">📷</button>
                 </div>
             </div>
             
-            <!-- Photos -->
             <div class="photo-grid">
                 <div class="photo-box ${hasBarang ? 'has-photo' : ''}" id="box-barang">
                     ${hasBarang ? `<img src="${d.fotoBarang}" alt="Barang"><button class="remove-btn" data-target="fotoBarang">✕</button>` : 
-                        `<div class="placeholder"><span class="big-icon">📦</span>Foto Barang</div>`}
+                        `<div class="placeholder"><span class="big-icon">📦</span>Foto Barang<br><span style="font-size:9px;">Tap untuk ambil foto</span></div>`}
                 </div>
                 <div class="photo-box ${hasStruk ? 'has-photo' : ''}" id="box-struk">
                     ${hasStruk ? `<img src="${d.fotoStruk}" alt="Struk"><button class="remove-btn" data-target="fotoStruk">✕</button>` : 
-                        `<div class="placeholder"><span class="big-icon">🧾</span>Foto Struk</div>`}
+                        `<div class="placeholder"><span class="big-icon">🧾</span>Foto Struk<br><span style="font-size:9px;">Tap untuk ambil foto</span></div>`}
                 </div>
             </div>
             
-            <!-- Hidden file inputs -->
             <input type="file" id="file-barang" class="hidden-input" accept="image/*" capture="environment">
             <input type="file" id="file-struk" class="hidden-input" accept="image/*" capture="environment">
             
-            <!-- Location -->
             <div class="location-card">
                 <div class="label">📍 Lokasi Berangkat</div>
                 ${hasLokasi ? `
@@ -1089,7 +775,6 @@ function renderStepBerangkat() {
                 </button>
             </div>
             
-            <!-- Action -->
             <button id="btn-berangkat" class="btn btn-success mt-16" ${!allReady ? 'disabled' : ''}>
                 ${allReady ? '🚀 BERANGKAT & KIRIM WA KE KONSUMEN' : '📸 Lengkapi foto + lokasi dulu'}
             </button>
@@ -1173,17 +858,15 @@ function renderStepSampai() {
         <div class="card">
             <div class="card-title"><span class="icon">📍</span> Step 3: Sampai Tujuan</div>
             
-            <!-- Foto Serah -->
             <div class="form-group">
                 <label class="form-label">📸 Foto Serah Terima (bersama konsumen) *</label>
                 <div class="photo-box ${hasSerah ? 'has-photo' : ''}" id="box-serah" style="height:180px;">
                     ${hasSerah ? `<img src="${d.fotoSerah}" alt="Serah"><button class="remove-btn" data-target="fotoSerah">✕</button>` : 
-                        `<div class="placeholder"><span class="big-icon">🤝</span>Tap untuk foto bersama konsumen</div>`}
+                        `<div class="placeholder"><span class="big-icon">🤝</span>Tap untuk foto bersama konsumen<br><span style="font-size:9px;">Klik untuk ambil foto</span></div>`}
                 </div>
                 <input type="file" id="file-serah" class="hidden-input" accept="image/*" capture="environment">
             </div>
             
-            <!-- Tanda Tangan -->
             <div class="form-group">
                 <label class="form-label">✍️ Tanda Tangan Digital Konsumen *</label>
                 <div class="signature-area" id="signature-area">
@@ -1196,7 +879,6 @@ function renderStepSampai() {
                 </div>
             </div>
             
-            <!-- Lokasi Sampai -->
             <div class="location-card">
                 <div class="label">📍 Lokasi Sampai</div>
                 ${hasLokasi ? `
@@ -1213,7 +895,6 @@ function renderStepSampai() {
                 </button>
             </div>
             
-            <!-- Jarak -->
             ${hasBerangkat && hasLokasi ? `
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
                     <div style="background:#0f1724;border-radius:12px;padding:12px;color:white;text-align:center;">
@@ -1232,7 +913,6 @@ function renderStepSampai() {
                 </a>
             ` : ''}
             
-            <!-- Action -->
             <button id="btn-selesai" class="btn btn-primary mt-16" ${!allReady ? 'disabled' : ''}>
                 ${allReady ? '✅ SELESAI PENGANTARAN' : '📸 Lengkapi foto + TTD + lokasi dulu'}
             </button>
@@ -1354,19 +1034,11 @@ function renderStepLog() {
             </div>
             
             <div style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;">
-    <button id="btn-export-excel" class="btn btn-sm btn-outline" style="flex:1;min-width:100px;">
-        📊 Export CSV
-    </button>
-    <button id="btn-export-sheets" class="btn btn-sm btn-success" style="flex:1;min-width:100px;">
-        📤 Google Sheets
-    </button>
-    <button id="btn-export-html" class="btn btn-sm btn-black" style="flex:1;min-width:100px;">
-        📋 Copy ke Sheets
-    </button>
-    <button id="btn-clear-logs" class="btn btn-sm btn-danger" style="flex:1;min-width:100px;">
-        🗑️ Hapus
-    </button>
-</div>
+                <button id="btn-export-excel" class="btn btn-sm btn-outline" style="flex:1;min-width:100px;">📊 Export CSV</button>
+                <button id="btn-export-sheets" class="btn btn-sm btn-success" style="flex:1;min-width:100px;">📤 Google Sheets</button>
+                <button id="btn-export-html" class="btn btn-sm btn-black" style="flex:1;min-width:100px;">📋 Copy ke Sheets</button>
+                <button id="btn-clear-logs" class="btn btn-sm btn-danger" style="flex:1;min-width:100px;">🗑️ Hapus</button>
+            </div>
             
             ${logs.map((log, i) => `
                 <div class="log-item" data-index="${i}">
@@ -1382,611 +1054,92 @@ function renderStepLog() {
     `;
 }
 
-    // Di attachMainEvents(), bagian step === 5 tambahkan:
+// ================================================================
+// RESET TO SETUP (FIX)
+// ================================================================
 
-const btnExportSheets = document.getElementById('btn-export-sheets');
-if (btnExportSheets) {
-    btnExportSheets.addEventListener('click', () => {
-        const url = prompt('📤 Masukkan URL Google Sheets (kosongkan untuk buka baru):');
-        if (url) {
-            window.open(url, '_blank');
-            showToast('📤 Buka Sheets, paste data dari tab lain');
-        } else {
-            window.open('https://sheets.google.com', '_blank');
-            showToast('📤 Buka Sheets baru, paste data dari export HTML');
-        }
+function resetToSetup() {
+    // Reset profile
+    STATE.profile = {
+        namaDeliman: '',
+        noDeliman: '',
+        noKonsumen: '',
+        namaKonsumen: '',
+        noToko: '6281122220723'
+    };
+    
+    // Reset delivery
+    STATE.delivery = {
+        id: generateId(),
+        resiNumber: '',
+        fotoBarang: null,
+        fotoStruk: null,
+        fotoSerah: null,
+        tandaTangan: null,
+        lokasiBerangkat: null,
+        lokasiSampai: null,
+        status: 'draft',
+        createdAt: Date.now()
+    };
+    
+    // Hapus storage
+    localStorage.removeItem('delivery_profile');
+    localStorage.removeItem('delivery');
+    
+    STATE.step = 1;
+    render();
+    showToast('🔄 Reset berhasil! Isi data konsumen baru.');
+}
+
+// ================================================================
+// EXPORT FUNCTIONS
+// ================================================================
+
+function exportExcel() {
+    const logs = STATE.logs;
+    if (logs.length === 0) {
+        showToast('⚠️ Belum ada log untuk di-export');
+        return;
+    }
+    
+    const headers = ['ID', 'Waktu', 'Deliman', 'No Deliman', 'Konsumen', 'No Konsumen', 
+                     'Resi', 'Jarak (km)', 'Durasi (menit)', 'Lat Berangkat', 'Lng Berangkat', 
+                     'Lat Sampai', 'Lng Sampai', 'Status'];
+    
+    const rows = logs.map(log => [
+        log.id,
+        log.waktu || '',
+        log.namaDeliman || '',
+        log.noDeliman || '',
+        log.namaKonsumen || '',
+        log.noKonsumen || '',
+        log.resiNumber || '',
+        log.jarak || '0',
+        log.durasi || '0',
+        log.lokasiBerangkat?.lat?.toFixed(6) || '',
+        log.lokasiBerangkat?.lng?.toFixed(6) || '',
+        log.lokasiSampai?.lat?.toFixed(6) || '',
+        log.lokasiSampai?.lng?.toFixed(6) || '',
+        log.status || ''
+    ]);
+    
+    let csv = headers.join(',') + '\n';
+    rows.forEach(row => {
+        csv += row.map(cell => `"${cell}"`).join(',') + '\n';
     });
+    
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = `delivery-log-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    showToast('✅ Excel berhasil di-export!');
 }
-
-const btnExportHTML = document.getElementById('btn-export-html');
-if (btnExportHTML) {
-    btnExportHTML.addEventListener('click', exportToGoogleSheets);
-}
-
-// ================================================================
-// ATTACH EVENTS - MAIN
-// ================================================================
-
-function attachMainEvents() {
-    const step = STATE.step;
-    
-    // ===== Step navigation =====
-    $$('.step-item').forEach(el => {
-        el.addEventListener('click', () => {
-            const s = parseInt(el.dataset.step);
-            if (s === 5 || s <= STATE.step + 1 || STATE.delivery.status === 'selesai') {
-                STATE.step = s;
-                render();
-            } else {
-                showToast('⚠️ Selesaikan step sebelumnya dulu');
-            }
-        });
-    });
-    
-    // ===== STEP 1: Berangkat =====
-    if (step === 1) {
-        // Resi input
-        const inputResi = document.getElementById('input-resi');
-        if (inputResi) {
-            inputResi.addEventListener('input', (e) => {
-                STATE.delivery.resiNumber = e.target.value;
-                saveToStorage('delivery', STATE.delivery);
-            });
-        }
-        
-        // Scan button
-        const btnScan = document.getElementById('btn-scan');
-        if (btnScan) {
-            btnScan.addEventListener('click', () => {
-                if ('BarcodeDetector' in window) {
-                    showToast('📷 Buka kamera untuk scan...');
-                    // Simplified - will implement full scanner if needed
-                    setTimeout(() => showToast('⚠️ Scan manual: ketik resi saja'), 1000);
-                } else {
-                    showToast('⚠️ Browser tidak support scan, ketik manual');
-                }
-            });
-        }
-        
-        // Photo: Barang
-        const boxBarang = document.getElementById('box-barang');
-        const fileBarang = document.getElementById('file-barang');
-        if (boxBarang && fileBarang) {
-            boxBarang.addEventListener('click', (e) => {
-                if (e.target.closest('.remove-btn')) return;
-                fileBarang.click();
-            });
-            fileBarang.addEventListener('change', (e) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    STATE.delivery.fotoBarang = ev.target.result;
-                    saveToStorage('delivery', STATE.delivery);
-                    showToast('✅ Foto barang tersimpan');
-                    render();
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-        
-        // Photo: Struk
-        const boxStruk = document.getElementById('box-struk');
-        const fileStruk = document.getElementById('file-struk');
-        if (boxStruk && fileStruk) {
-            boxStruk.addEventListener('click', (e) => {
-                if (e.target.closest('.remove-btn')) return;
-                fileStruk.click();
-            });
-            fileStruk.addEventListener('change', (e) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    STATE.delivery.fotoStruk = ev.target.result;
-                    saveToStorage('delivery', STATE.delivery);
-                    showToast('✅ Foto struk tersimpan');
-                    render();
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-        
-        // Remove photo buttons
-        $$('.remove-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const target = btn.dataset.target;
-                if (target === 'fotoBarang') STATE.delivery.fotoBarang = null;
-                if (target === 'fotoStruk') STATE.delivery.fotoStruk = null;
-                if (target === 'fotoSerah') STATE.delivery.fotoSerah = null;
-                saveToStorage('delivery', STATE.delivery);
-                render();
-                showToast('🗑️ Foto dihapus');
-            });
-        });
-        
-        // Ambil Lokasi Berangkat
-        const btnAmbilBerangkat = document.getElementById('btn-ambil-berangkat');
-        if (btnAmbilBerangkat) {
-            btnAmbilBerangkat.addEventListener('click', () => {
-                if (!navigator.geolocation) {
-                    showToast('⚠️ Geolocation tidak support');
-                    return;
-                }
-                btnAmbilBerangkat.textContent = '⏳ Mengambil...';
-                btnAmbilBerangkat.disabled = true;
-                
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                        STATE.delivery.lokasiBerangkat = {
-                            lat: pos.coords.latitude,
-                            lng: pos.coords.longitude,
-                            timestamp: Date.now(),
-                            accuracy: pos.coords.accuracy
-                        };
-                        saveToStorage('delivery', STATE.delivery);
-                        showToast('📍 Lokasi berangkat terkunci!');
-                        render();
-                    },
-                    (err) => {
-                        showToast('❌ Gagal ambil lokasi: ' + err.message);
-                        btnAmbilBerangkat.textContent = '📍 Ambil Lokasi';
-                        btnAmbilBerangkat.disabled = false;
-                    },
-                    { enableHighAccuracy: true, timeout: 15000 }
-                );
-            });
-        }
-        
-        // Tombol Berangkat
-        const btnBerangkat = document.getElementById('btn-berangkat');
-        if (btnBerangkat) {
-            btnBerangkat.addEventListener('click', () => {
-                const d = STATE.delivery;
-                const p = STATE.profile;
-                
-                if (!d.fotoBarang) { showToast('⚠️ Foto barang belum diambil'); return; }
-                if (!d.fotoStruk) { showToast('⚠️ Foto struk belum diambil'); return; }
-                if (!d.lokasiBerangkat) { showToast('⚠️ Lokasi berangkat belum diambil'); return; }
-                
-                d.status = 'otw';
-                saveToStorage('delivery', d);
-                
-                // Kirim WA ke konsumen
-                const msg = `Halo Kak ${p.namaKonsumen},
-                
-🚚 Pesanan Anda sedang dalam perjalanan!
-Diantar oleh: ${p.namaDeliman}
-Resi: ${d.resiNumber || '-'}
-Berangkat dari: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
-Waktu: ${formatTime(d.lokasiBerangkat.timestamp)}
-
-📍 Lihat lokasi: ${getGoogleMapsLocationUrl(d.lokasiBerangkat.lat, d.lokasiBerangkat.lng)}
-
-Mohon ditunggu ya Kak 🙏`;
-
-                sendWA(p.noKonsumen, msg);
-                showToast('✅ Notifikasi terkirim ke konsumen!');
-                
-                STATE.step = 2;
-                render();
-            });
-        }
-    }
-    
-    // ===== STEP 2: OTW =====
-    if (step === 2) {
-        const btnWAOTW = document.getElementById('btn-wa-otw');
-        if (btnWAOTW) {
-            btnWAOTW.addEventListener('click', () => {
-                const d = STATE.delivery;
-                const p = STATE.profile;
-                const msg = `Halo Kak ${p.namaKonsumen},
-
-🚚 Saya (${p.namaDeliman}) sedang dalam perjalanan mengantar pesanan Anda.
-Resi: ${d.resiNumber || '-'}
-
-📦 Estimasi tiba 15-30 menit lagi.
-Mohon siap-siap ya Kak 🙏`;
-
-                sendWA(p.noKonsumen, msg);
-                showToast('💬 Update WA terkirim!');
-            });
-        }
-        
-        const btnKeSampai = document.getElementById('btn-ke-sampai');
-        if (btnKeSampai) {
-            btnKeSampai.addEventListener('click', () => {
-                STATE.step = 3;
-                render();
-            });
-        }
-    }
-    
-    // ===== STEP 3: Sampai =====
-    if (step === 3) {
-        // Photo Serah
-        const boxSerah = document.getElementById('box-serah');
-        const fileSerah = document.getElementById('file-serah');
-        if (boxSerah && fileSerah) {
-            boxSerah.addEventListener('click', (e) => {
-                if (e.target.closest('.remove-btn')) return;
-                fileSerah.click();
-            });
-            fileSerah.addEventListener('change', (e) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    STATE.delivery.fotoSerah = ev.target.result;
-                    saveToStorage('delivery', STATE.delivery);
-                    showToast('✅ Foto serah terima tersimpan');
-                    render();
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-        
-        // Signature
-        initSignature();
-        
-        // Ambil Lokasi Sampai
-        const btnAmbilSampai = document.getElementById('btn-ambil-sampai');
-        if (btnAmbilSampai) {
-            btnAmbilSampai.addEventListener('click', () => {
-                if (!navigator.geolocation) {
-                    showToast('⚠️ Geolocation tidak support');
-                    return;
-                }
-                btnAmbilSampai.textContent = '⏳ Mengambil...';
-                btnAmbilSampai.disabled = true;
-                
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                        STATE.delivery.lokasiSampai = {
-                            lat: pos.coords.latitude,
-                            lng: pos.coords.longitude,
-                            timestamp: Date.now(),
-                            accuracy: pos.coords.accuracy
-                        };
-                        saveToStorage('delivery', STATE.delivery);
-                        showToast('📍 Lokasi sampai terkunci!');
-                        render();
-                    },
-                    (err) => {
-                        showToast('❌ Gagal ambil lokasi: ' + err.message);
-                        btnAmbilSampai.textContent = '📍 Ambil Lokasi Sampai';
-                        btnAmbilSampai.disabled = false;
-                    },
-                    { enableHighAccuracy: true, timeout: 15000 }
-                );
-            });
-        }
-        
-        // Tombol Selesai
-        const btnSelesai = document.getElementById('btn-selesai');
-        if (btnSelesai) {
-            btnSelesai.addEventListener('click', () => {
-                const d = STATE.delivery;
-                if (!d.fotoSerah) { showToast('⚠️ Foto serah terima belum diambil'); return; }
-                if (!d.tandaTangan) { showToast('⚠️ Tanda tangan belum diisi'); return; }
-                if (!d.lokasiSampai) { showToast('⚠️ Lokasi sampai belum diambil'); return; }
-                
-                d.status = 'selesai';
-                saveToStorage('delivery', d);
-                
-                // Simpan ke log
-                const p = STATE.profile;
-                const jarak = haversine(
-                    d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
-                    d.lokasiSampai.lat, d.lokasiSampai.lng
-                );
-                
-                const logEntry = {
-                    id: d.id,
-                    waktu: formatTime(Date.now()),
-                    timestamp: Date.now(),
-                    namaDeliman: p.namaDeliman,
-                    noDeliman: p.noDeliman,
-                    namaKonsumen: p.namaKonsumen,
-                    noKonsumen: p.noKonsumen,
-                    noToko: p.noToko,
-                    resiNumber: d.resiNumber || '-',
-                    jarak: jarak.toFixed(2),
-                    durasi: Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000),
-                    lokasiBerangkat: d.lokasiBerangkat,
-                    lokasiSampai: d.lokasiSampai,
-                    status: 'SELESAI',
-                    fotoBarang: d.fotoBarang,
-                    fotoStruk: d.fotoStruk,
-                    fotoSerah: d.fotoSerah,
-                    tandaTangan: d.tandaTangan
-                };
-                
-                STATE.logs.unshift(logEntry);
-                saveToStorage('logs', STATE.logs);
-                
-                // Kirim WA ke Toko (Auto)
-                const msgToko = `*LAPORAN DELIVERY SELESAI* ✅
-
-📦 ID: ${d.id}
-👤 Deliman: ${p.namaDeliman} (${p.noDeliman})
-👤 Konsumen: ${p.namaKonsumen} (${p.noKonsumen})
-📋 Resi: ${d.resiNumber || '-'}
-
-📍 Berangkat: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
-🕐 ${formatTime(d.lokasiBerangkat.timestamp)}
-
-📍 Sampai: ${d.lokasiSampai.lat.toFixed(6)}, ${d.lokasiSampai.lng.toFixed(6)}
-🕐 ${formatTime(d.lokasiSampai.timestamp)}
-
-📏 Jarak: ${jarak.toFixed(2)} km
-⏱️ Durasi: ${logEntry.durasi} menit
-🗺️ Rute: ${getGoogleMapsRouteUrl(d.lokasiBerangkat.lat, d.lokasiBerangkat.lng, d.lokasiSampai.lat, d.lokasiSampai.lng)}
-
-✅ Status: SELESAI DIANTAR
-
----
-Terima kasih 🙏`;
-
-                sendWA(p.noToko, msgToko);
-                showToast('✅ Laporan terkirim ke Toko!');
-                
-                STATE.step = 4;
-                render();
-            });
-        }
-    }
-    
-    // ===== STEP 4: Selesai =====
-    if (step === 4) {
-        const btnComplete = document.getElementById('btn-complete');
-        if (btnComplete) {
-            btnComplete.addEventListener('click', () => {
-                // Already handled above
-            });
-        }
-        
-        const btnWAToko = document.getElementById('btn-wa-toko');
-        if (btnWAToko) {
-            btnWAToko.addEventListener('click', () => {
-                const d = STATE.delivery;
-                const p = STATE.profile;
-                const jarak = haversine(
-                    d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
-                    d.lokasiSampai.lat, d.lokasiSampai.lng
-                );
-                const msg = `*LAPORAN DELIVERY SELESAI* ✅
-
-📦 ID: ${d.id}
-👤 Deliman: ${p.namaDeliman}
-👤 Konsumen: ${p.namaKonsumen}
-📋 Resi: ${d.resiNumber || '-'}
-
-📍 Berangkat: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
-📍 Sampai: ${d.lokasiSampai.lat.toFixed(6)}, ${d.lokasiSampai.lng.toFixed(6)}
-📏 Jarak: ${jarak.toFixed(2)} km
-⏱️ Durasi: ${Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000)} menit
-
-✅ Status: SELESAI DIANTAR`;
-                sendWA(p.noToko, msg);
-                showToast('💬 Laporan terkirim ke Toko');
-            });
-        }
-        
-        const btnWAKonsumen = document.getElementById('btn-wa-konsumen');
-        if (btnWAKonsumen) {
-            btnWAKonsumen.addEventListener('click', () => {
-                const p = STATE.profile;
-                const d = STATE.delivery;
-                const msg = `Halo Kak ${p.namaKonsumen},
-
-✅ Pesanan Anda sudah sampai dengan selamat!
-Terima kasih sudah order 🙏
-
-Diantar oleh: ${p.namaDeliman}
-Resi: ${d.resiNumber || '-'}
-
-⭐ Beri bintang 5 ya Kak!
-
----
-Terima kasih 🙏`;
-                sendWA(p.noKonsumen, msg);
-                showToast('💬 Konfirmasi terkirim ke konsumen');
-            });
-        }
-        
-        const btnNewDelivery = document.getElementById('btn-new-delivery');
-        if (btnNewDelivery) {
-            btnNewDelivery.addEventListener('click', () => {
-                STATE.delivery = {
-                    id: generateId(),
-                    resiNumber: '',
-                    fotoBarang: null,
-                    fotoStruk: null,
-                    fotoSerah: null,
-                    tandaTangan: null,
-                    lokasiBerangkat: null,
-                    lokasiSampai: null,
-                    status: 'draft',
-                    createdAt: Date.now()
-                };
-                STATE.step = 1;
-                saveToStorage('delivery', STATE.delivery);
-                showToast('🔄 Siap delivery baru!');
-                render();
-            });
-        }
-        
-        const btnLogExport = document.getElementById('btn-log-export');
-        if (btnLogExport) {
-            btnLogExport.addEventListener('click', exportExcel);
-        }
-        
-        const btnLogInfo = document.getElementById('btn-log-info');
-        if (btnLogInfo) {
-            btnLogInfo.addEventListener('click', showLogInfo);
-        }
-    }
-    
-    // ===== STEP 5: Log =====
-    if (step === 5) {
-        const btnExportExcel = document.getElementById('btn-export-excel');
-        if (btnExportExcel) {
-            btnExportExcel.addEventListener('click', exportExcel);
-        }
-        
-        const btnClearLogs = document.getElementById('btn-clear-logs');
-        if (btnClearLogs) {
-            btnClearLogs.addEventListener('click', () => {
-                if (confirm('Hapus semua log?')) {
-                    STATE.logs = [];
-                    saveToStorage('logs', STATE.logs);
-                    showToast('🗑️ Log dihapus');
-                    render();
-                }
-            });
-        }
-        
-        const btnExportSheet = document.getElementById('btn-export-sheet');
-        if (btnExportSheet) {
-            btnExportSheet.addEventListener('click', () => {
-                showToast('📤 Buka Google Sheet...');
-                // Open sheet link
-                const sheetUrl = prompt('Masukkan Google Sheet URL (Apps Script) atau kosongkan untuk CSV:');
-                if (sheetUrl) {
-                    window.open(sheetUrl, '_blank');
-                } else {
-                    exportExcel();
-                }
-            });
-        }
-        
-        // Click log item to view detail
-        $$('.log-item').forEach(el => {
-            el.addEventListener('click', () => {
-                const idx = parseInt(el.dataset.index);
-                const log = STATE.logs[idx];
-                if (log) showLogDetail(log);
-            });
-        });
-    }
-}
-
-// ================================================================
-// SIGNATURE
-// ================================================================
-
-let signatureCanvas = null;
-let signatureCtx = null;
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-
-function initSignature() {
-    const canvas = document.getElementById('signature-canvas');
-    if (!canvas) return;
-    
-    const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = rect.width * 2;
-    canvas.height = 160 * 2;
-    canvas.style.width = '100%';
-    canvas.style.height = '160px';
-    
-    signatureCanvas = canvas;
-    signatureCtx = canvas.getContext('2d');
-    signatureCtx.scale(2, 2);
-    signatureCtx.lineWidth = 2.5;
-    signatureCtx.lineCap = 'round';
-    signatureCtx.lineJoin = 'round';
-    signatureCtx.strokeStyle = '#1a1a2e';
-    
-    // Load existing signature
-    if (STATE.delivery.tandaTangan) {
-        const img = new Image();
-        img.onload = () => {
-            signatureCtx.drawImage(img, 0, 0, canvas.width/2, canvas.height/2);
-        };
-        img.src = STATE.delivery.tandaTangan;
-    }
-    
-    // Events
-    const startDraw = (e) => {
-        e.preventDefault();
-        const rect2 = canvas.getBoundingClientRect();
-        const x = (e.clientX || e.touches?.[0]?.clientX || 0) - rect2.left;
-        const y = (e.clientY || e.touches?.[0]?.clientY || 0) - rect2.top;
-        isDrawing = true;
-        lastX = x;
-        lastY = y;
-        signatureCtx.beginPath();
-        signatureCtx.moveTo(x, y);
-    };
-    
-    const draw = (e) => {
-        e.preventDefault();
-        if (!isDrawing) return;
-        const rect2 = canvas.getBoundingClientRect();
-        const x = (e.clientX || e.touches?.[0]?.clientX || 0) - rect2.left;
-        const y = (e.clientY || e.touches?.[0]?.clientY || 0) - rect2.top;
-        signatureCtx.lineTo(x, y);
-        signatureCtx.stroke();
-        lastX = x;
-        lastY = y;
-    };
-    
-    const endDraw = (e) => {
-        e.preventDefault();
-        isDrawing = false;
-        // Simpan sementara
-        const dataUrl = canvas.toDataURL('image/png');
-        STATE.signatureData = dataUrl;
-    };
-    
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', endDraw);
-    canvas.addEventListener('mouseleave', endDraw);
-    canvas.addEventListener('touchstart', startDraw);
-    canvas.addEventListener('touchmove', draw);
-    canvas.addEventListener('touchend', endDraw);
-    
-    // Clear button
-    const btnClear = document.getElementById('btn-clear-ttd');
-    if (btnClear) {
-        btnClear.addEventListener('click', () => {
-            signatureCtx.clearRect(0, 0, canvas.width/2, canvas.height/2);
-            signatureCtx.fillStyle = 'white';
-            signatureCtx.fillRect(0, 0, canvas.width/2, canvas.height/2);
-            STATE.signatureData = null;
-            STATE.delivery.tandaTangan = null;
-            saveToStorage('delivery', STATE.delivery);
-            showToast('🗑️ Tanda tangan dihapus');
-        });
-    }
-    
-    // Save button
-    const btnSave = document.getElementById('btn-save-ttd');
-    if (btnSave) {
-        btnSave.addEventListener('click', () => {
-            const dataUrl = canvas.toDataURL('image/png');
-            STATE.delivery.tandaTangan = dataUrl;
-            STATE.signatureData = dataUrl;
-            saveToStorage('delivery', STATE.delivery);
-            showToast('✅ Tanda tangan tersimpan!');
-            
-            // Update UI
-            const placeholder = document.querySelector('.signature-area .placeholder');
-            if (placeholder) placeholder.style.display = 'none';
-        });
-    }
-}
-
-
-// ================================================================
-// EXPORT KE GOOGLE SHEETS (FIX)
-// ================================================================
 
 function exportToGoogleSheets() {
     const logs = STATE.logs;
@@ -1995,48 +1148,44 @@ function exportToGoogleSheets() {
         return;
     }
     
-    // Buat format HTML untuk Google Sheets
-    let html = '<html><head><meta charset="UTF-8"></head><body><table border="1">';
+    let html = '<html><head><meta charset="UTF-8"></head><body><table border="1" style="border-collapse:collapse;font-family:sans-serif;">';
     
-    // Header
-    html += '<tr>';
+    html += '<tr style="background:#16a34a;color:white;">';
     ['ID', 'Waktu', 'Deliman', 'No Deliman', 'Konsumen', 'No Konsumen', 
      'Resi', 'Jarak (km)', 'Durasi (menit)', 'Lat Berangkat', 'Lng Berangkat', 
      'Lat Sampai', 'Lng Sampai', 'Status'].forEach(h => {
-        html += `<th>${h}</th>`;
+        html += `<th style="padding:8px 12px;border:1px solid #ccc;">${h}</th>`;
     });
     html += '</tr>';
     
-    // Data
-    logs.forEach(log => {
-        html += '<tr>';
-        html += `<td>${log.id || ''}</td>`;
-        html += `<td>${log.waktu || ''}</td>`;
-        html += `<td>${log.namaDeliman || ''}</td>`;
-        html += `<td>${log.noDeliman || ''}</td>`;
-        html += `<td>${log.namaKonsumen || ''}</td>`;
-        html += `<td>${log.noKonsumen || ''}</td>`;
-        html += `<td>${log.resiNumber || ''}</td>`;
-        html += `<td>${log.jarak || '0'}</td>`;
-        html += `<td>${log.durasi || '0'}</td>`;
-        html += `<td>${log.lokasiBerangkat?.lat?.toFixed(6) || ''}</td>`;
-        html += `<td>${log.lokasiBerangkat?.lng?.toFixed(6) || ''}</td>`;
-        html += `<td>${log.lokasiSampai?.lat?.toFixed(6) || ''}</td>`;
-        html += `<td>${log.lokasiSampai?.lng?.toFixed(6) || ''}</td>`;
-        html += `<td>${log.status || ''}</td>`;
+    logs.forEach((log, i) => {
+        const bg = i % 2 === 0 ? 'white' : '#f8fafc';
+        html += `<tr style="background:${bg};">`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.id || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.waktu || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.namaDeliman || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.noDeliman || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.namaKonsumen || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.noKonsumen || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.resiNumber || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.jarak || '0'}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.durasi || '0'}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.lokasiBerangkat?.lat?.toFixed(6) || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.lokasiBerangkat?.lng?.toFixed(6) || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.lokasiSampai?.lat?.toFixed(6) || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;">${log.lokasiSampai?.lng?.toFixed(6) || ''}</td>`;
+        html += `<td style="padding:6px 10px;border:1px solid #ccc;"><span style="background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:12px;font-weight:700;font-size:11px;">${log.status || ''}</span></td>`;
         html += '</tr>';
     });
     
     html += '</table></body></html>';
     
-    // Buka di tab baru -> copy paste ke Google Sheets
     const win = window.open('', '_blank');
     if (win) {
         win.document.write(html);
         win.document.close();
         showToast('✅ Copy tabel, paste ke Google Sheets!');
     } else {
-        // Fallback: download HTML
         const blob = new Blob([html], { type: 'text/html' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -2045,10 +1194,6 @@ function exportToGoogleSheets() {
         showToast('✅ Download HTML, buka di browser lalu copy ke Sheets');
     }
 }
-
-// ================================================================
-// LOG INFO & DETAIL
-// ================================================================
 
 function showLogInfo() {
     const logs = STATE.logs;
@@ -2104,12 +1249,599 @@ Delivery Track Pro`;
 }
 
 // ================================================================
-// UPDATE UI
+// SIGNATURE
 // ================================================================
 
-function updateStepUI() {
-    // Nothing else needed - render handles it
+let signatureCanvas = null;
+let signatureCtx = null;
+let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+
+function initSignature() {
+    const canvas = document.getElementById('signature-canvas');
+    if (!canvas) return;
+    
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * 2;
+    canvas.height = 160 * 2;
+    canvas.style.width = '100%';
+    canvas.style.height = '160px';
+    
+    signatureCanvas = canvas;
+    signatureCtx = canvas.getContext('2d');
+    signatureCtx.scale(2, 2);
+    signatureCtx.lineWidth = 2.5;
+    signatureCtx.lineCap = 'round';
+    signatureCtx.lineJoin = 'round';
+    signatureCtx.strokeStyle = '#1a1a2e';
+    
+    if (STATE.delivery.tandaTangan) {
+        const img = new Image();
+        img.onload = () => {
+            signatureCtx.drawImage(img, 0, 0, canvas.width/2, canvas.height/2);
+        };
+        img.src = STATE.delivery.tandaTangan;
+    }
+    
+    const startDraw = (e) => {
+        e.preventDefault();
+        const rect2 = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches?.[0]?.clientX || 0) - rect2.left;
+        const y = (e.clientY || e.touches?.[0]?.clientY || 0) - rect2.top;
+        isDrawing = true;
+        lastX = x;
+        lastY = y;
+        signatureCtx.beginPath();
+        signatureCtx.moveTo(x, y);
+    };
+    
+    const draw = (e) => {
+        e.preventDefault();
+        if (!isDrawing) return;
+        const rect2 = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches?.[0]?.clientX || 0) - rect2.left;
+        const y = (e.clientY || e.touches?.[0]?.clientY || 0) - rect2.top;
+        signatureCtx.lineTo(x, y);
+        signatureCtx.stroke();
+        lastX = x;
+        lastY = y;
+    };
+    
+    const endDraw = (e) => {
+        e.preventDefault();
+        isDrawing = false;
+        const dataUrl = canvas.toDataURL('image/png');
+        STATE.signatureData = dataUrl;
+    };
+    
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+    canvas.addEventListener('touchstart', startDraw);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', endDraw);
+    
+    const btnClear = document.getElementById('btn-clear-ttd');
+    if (btnClear) {
+        btnClear.addEventListener('click', () => {
+            signatureCtx.clearRect(0, 0, canvas.width/2, canvas.height/2);
+            signatureCtx.fillStyle = 'white';
+            signatureCtx.fillRect(0, 0, canvas.width/2, canvas.height/2);
+            STATE.signatureData = null;
+            STATE.delivery.tandaTangan = null;
+            saveToStorage('delivery', STATE.delivery);
+            showToast('🗑️ Tanda tangan dihapus');
+        });
+    }
+    
+    const btnSave = document.getElementById('btn-save-ttd');
+    if (btnSave) {
+        btnSave.addEventListener('click', () => {
+            const dataUrl = canvas.toDataURL('image/png');
+            STATE.delivery.tandaTangan = dataUrl;
+            STATE.signatureData = dataUrl;
+            saveToStorage('delivery', STATE.delivery);
+            showToast('✅ Tanda tangan tersimpan!');
+            const placeholder = document.querySelector('.signature-area .placeholder');
+            if (placeholder) placeholder.style.display = 'none';
+        });
+    }
 }
+
+// ================================================================
+// ATTACH EVENTS
+// ================================================================
+
+function attachMainEvents() {
+    const step = STATE.step;
+    
+    $$('.step-item').forEach(el => {
+        el.addEventListener('click', () => {
+            const s = parseInt(el.dataset.step);
+            if (s === 5 || s <= STATE.step + 1 || STATE.delivery.status === 'selesai') {
+                STATE.step = s;
+                render();
+            } else {
+                showToast('⚠️ Selesaikan step sebelumnya dulu');
+            }
+        });
+    });
+    
+    // ===== STEP 1 =====
+    if (step === 1) {
+        const inputResi = document.getElementById('input-resi');
+        if (inputResi) {
+            inputResi.addEventListener('input', (e) => {
+                STATE.delivery.resiNumber = e.target.value;
+                saveToStorage('delivery', STATE.delivery);
+            });
+        }
+        
+        // FIX: Tombol Scan
+        const btnScan = document.getElementById('btn-scan');
+        if (btnScan) {
+            btnScan.addEventListener('click', () => {
+                // Coba buka kamera via input file dengan capture
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.capture = 'environment';
+                input.style.display = 'none';
+                document.body.appendChild(input);
+                
+                input.onchange = (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                            // Tampilkan hasil scan sebagai resi
+                            const result = prompt('📷 Hasil scan (ketik resi atau biarkan kosong):', 'SCAN-' + Date.now().toString(36).toUpperCase());
+                            if (result) {
+                                STATE.delivery.resiNumber = result;
+                                document.getElementById('input-resi').value = result;
+                                saveToStorage('delivery', STATE.delivery);
+                                showToast('✅ Resi terisi: ' + result);
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                    document.body.removeChild(input);
+                };
+                
+                input.click();
+                showToast('📷 Buka kamera untuk scan...');
+            });
+        }
+        
+        // FOTO: BARANG
+        const boxBarang = document.getElementById('box-barang');
+        const fileBarang = document.getElementById('file-barang');
+        if (boxBarang && fileBarang) {
+            boxBarang.addEventListener('click', (e) => {
+                if (e.target.closest('.remove-btn')) return;
+                openCamera('file-barang', (data) => {
+                    STATE.delivery.fotoBarang = data;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto barang tersimpan');
+                    render();
+                });
+            });
+            fileBarang.addEventListener('change', (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    STATE.delivery.fotoBarang = ev.target.result;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto barang tersimpan');
+                    render();
+                };
+                reader.readAsDataURL(file);
+                fileBarang.value = '';
+            });
+        }
+        
+        // FOTO: STRUK
+        const boxStruk = document.getElementById('box-struk');
+        const fileStruk = document.getElementById('file-struk');
+        if (boxStruk && fileStruk) {
+            boxStruk.addEventListener('click', (e) => {
+                if (e.target.closest('.remove-btn')) return;
+                openCamera('file-struk', (data) => {
+                    STATE.delivery.fotoStruk = data;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto struk tersimpan');
+                    render();
+                });
+            });
+            fileStruk.addEventListener('change', (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    STATE.delivery.fotoStruk = ev.target.result;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto struk tersimpan');
+                    render();
+                };
+                reader.readAsDataURL(file);
+                fileStruk.value = '';
+            });
+        }
+        
+        // REMOVE PHOTO
+        $$('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const target = btn.dataset.target;
+                if (target === 'fotoBarang') STATE.delivery.fotoBarang = null;
+                if (target === 'fotoStruk') STATE.delivery.fotoStruk = null;
+                if (target === 'fotoSerah') STATE.delivery.fotoSerah = null;
+                saveToStorage('delivery', STATE.delivery);
+                render();
+                showToast('🗑️ Foto dihapus');
+            });
+        });
+        
+        // AMBIL LOKASI BERANGKAT
+        const btnAmbilBerangkat = document.getElementById('btn-ambil-berangkat');
+        if (btnAmbilBerangkat) {
+            btnAmbilBerangkat.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    showToast('⚠️ Geolocation tidak support');
+                    return;
+                }
+                btnAmbilBerangkat.textContent = '⏳ Mengambil...';
+                btnAmbilBerangkat.disabled = true;
+                
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        STATE.delivery.lokasiBerangkat = {
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude,
+                            timestamp: Date.now(),
+                            accuracy: pos.coords.accuracy
+                        };
+                        saveToStorage('delivery', STATE.delivery);
+                        showToast('📍 Lokasi berangkat terkunci!');
+                        render();
+                    },
+                    (err) => {
+                        showToast('❌ Gagal ambil lokasi: ' + err.message);
+                        btnAmbilBerangkat.textContent = '📍 Ambil Lokasi';
+                        btnAmbilBerangkat.disabled = false;
+                    },
+                    { enableHighAccuracy: true, timeout: 15000 }
+                );
+            });
+        }
+        
+        // TOMBOL BERANGKAT
+        const btnBerangkat = document.getElementById('btn-berangkat');
+        if (btnBerangkat) {
+            btnBerangkat.addEventListener('click', () => {
+                const d = STATE.delivery;
+                const p = STATE.profile;
+                
+                if (!d.fotoBarang) { showToast('⚠️ Foto barang belum diambil'); return; }
+                if (!d.fotoStruk) { showToast('⚠️ Foto struk belum diambil'); return; }
+                if (!d.lokasiBerangkat) { showToast('⚠️ Lokasi berangkat belum diambil'); return; }
+                
+                d.status = 'otw';
+                saveToStorage('delivery', d);
+                
+                const msg = `Halo Kak ${p.namaKonsumen},
+                
+🚚 Pesanan Anda sedang dalam perjalanan!
+Diantar oleh: ${p.namaDeliman}
+Resi: ${d.resiNumber || '-'}
+Berangkat dari: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
+Waktu: ${formatTime(d.lokasiBerangkat.timestamp)}
+
+📍 Lihat lokasi: ${getGoogleMapsLocationUrl(d.lokasiBerangkat.lat, d.lokasiBerangkat.lng)}
+
+Mohon ditunggu ya Kak 🙏`;
+
+                sendWA(p.noKonsumen, msg);
+                showToast('✅ Notifikasi terkirim ke konsumen!');
+                
+                STATE.step = 2;
+                render();
+            });
+        }
+    }
+    
+    // ===== STEP 2 =====
+    if (step === 2) {
+        const btnWAOTW = document.getElementById('btn-wa-otw');
+        if (btnWAOTW) {
+            btnWAOTW.addEventListener('click', () => {
+                const d = STATE.delivery;
+                const p = STATE.profile;
+                const msg = `Halo Kak ${p.namaKonsumen},
+
+🚚 Saya (${p.namaDeliman}) sedang dalam perjalanan mengantar pesanan Anda.
+Resi: ${d.resiNumber || '-'}
+
+📦 Estimasi tiba 15-30 menit lagi.
+Mohon siap-siap ya Kak 🙏`;
+
+                sendWA(p.noKonsumen, msg);
+                showToast('💬 Update WA terkirim!');
+            });
+        }
+        
+        const btnKeSampai = document.getElementById('btn-ke-sampai');
+        if (btnKeSampai) {
+            btnKeSampai.addEventListener('click', () => {
+                STATE.step = 3;
+                render();
+            });
+        }
+    }
+    
+    // ===== STEP 3 =====
+    if (step === 3) {
+        // FOTO SERAH
+        const boxSerah = document.getElementById('box-serah');
+        const fileSerah = document.getElementById('file-serah');
+        if (boxSerah && fileSerah) {
+            boxSerah.addEventListener('click', (e) => {
+                if (e.target.closest('.remove-btn')) return;
+                openCamera('file-serah', (data) => {
+                    STATE.delivery.fotoSerah = data;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto serah terima tersimpan');
+                    render();
+                });
+            });
+            fileSerah.addEventListener('change', (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    STATE.delivery.fotoSerah = ev.target.result;
+                    saveToStorage('delivery', STATE.delivery);
+                    showToast('✅ Foto serah terima tersimpan');
+                    render();
+                };
+                reader.readAsDataURL(file);
+                fileSerah.value = '';
+            });
+        }
+        
+        initSignature();
+        
+        // AMBIL LOKASI SAMPAI
+        const btnAmbilSampai = document.getElementById('btn-ambil-sampai');
+        if (btnAmbilSampai) {
+            btnAmbilSampai.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    showToast('⚠️ Geolocation tidak support');
+                    return;
+                }
+                btnAmbilSampai.textContent = '⏳ Mengambil...';
+                btnAmbilSampai.disabled = true;
+                
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        STATE.delivery.lokasiSampai = {
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude,
+                            timestamp: Date.now(),
+                            accuracy: pos.coords.accuracy
+                        };
+                        saveToStorage('delivery', STATE.delivery);
+                        showToast('📍 Lokasi sampai terkunci!');
+                        render();
+                    },
+                    (err) => {
+                        showToast('❌ Gagal ambil lokasi: ' + err.message);
+                        btnAmbilSampai.textContent = '📍 Ambil Lokasi Sampai';
+                        btnAmbilSampai.disabled = false;
+                    },
+                    { enableHighAccuracy: true, timeout: 15000 }
+                );
+            });
+        }
+        
+        // TOMBOL SELESAI
+        const btnSelesai = document.getElementById('btn-selesai');
+        if (btnSelesai) {
+            btnSelesai.addEventListener('click', () => {
+                const d = STATE.delivery;
+                if (!d.fotoSerah) { showToast('⚠️ Foto serah terima belum diambil'); return; }
+                if (!d.tandaTangan) { showToast('⚠️ Tanda tangan belum diisi'); return; }
+                if (!d.lokasiSampai) { showToast('⚠️ Lokasi sampai belum diambil'); return; }
+                
+                d.status = 'selesai';
+                saveToStorage('delivery', d);
+                
+                const p = STATE.profile;
+                const jarak = haversine(
+                    d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
+                    d.lokasiSampai.lat, d.lokasiSampai.lng
+                );
+                
+                const logEntry = {
+                    id: d.id,
+                    waktu: formatTime(Date.now()),
+                    timestamp: Date.now(),
+                    namaDeliman: p.namaDeliman,
+                    noDeliman: p.noDeliman,
+                    namaKonsumen: p.namaKonsumen,
+                    noKonsumen: p.noKonsumen,
+                    noToko: p.noToko,
+                    resiNumber: d.resiNumber || '-',
+                    jarak: jarak.toFixed(2),
+                    durasi: Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000),
+                    lokasiBerangkat: d.lokasiBerangkat,
+                    lokasiSampai: d.lokasiSampai,
+                    status: 'SELESAI',
+                    fotoBarang: d.fotoBarang,
+                    fotoStruk: d.fotoStruk,
+                    fotoSerah: d.fotoSerah,
+                    tandaTangan: d.tandaTangan
+                };
+                
+                STATE.logs.unshift(logEntry);
+                saveToStorage('logs', STATE.logs);
+                
+                const msgToko = `*LAPORAN DELIVERY SELESAI* ✅
+
+📦 ID: ${d.id}
+👤 Deliman: ${p.namaDeliman} (${p.noDeliman})
+👤 Konsumen: ${p.namaKonsumen} (${p.noKonsumen})
+📋 Resi: ${d.resiNumber || '-'}
+
+📍 Berangkat: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
+🕐 ${formatTime(d.lokasiBerangkat.timestamp)}
+
+📍 Sampai: ${d.lokasiSampai.lat.toFixed(6)}, ${d.lokasiSampai.lng.toFixed(6)}
+🕐 ${formatTime(d.lokasiSampai.timestamp)}
+
+📏 Jarak: ${jarak.toFixed(2)} km
+⏱️ Durasi: ${logEntry.durasi} menit
+🗺️ Rute: ${getGoogleMapsRouteUrl(d.lokasiBerangkat.lat, d.lokasiBerangkat.lng, d.lokasiSampai.lat, d.lokasiSampai.lng)}
+
+✅ Status: SELESAI DIANTAR
+
+---
+Terima kasih 🙏`;
+
+                sendWA(p.noToko, msgToko);
+                showToast('✅ Laporan terkirim ke Toko!');
+                
+                STATE.step = 4;
+                render();
+            });
+        }
+    }
+    
+    // ===== STEP 4 =====
+    if (step === 4) {
+        const btnComplete = document.getElementById('btn-complete');
+        if (btnComplete) {
+            btnComplete.addEventListener('click', () => {});
+        }
+        
+        const btnWAToko = document.getElementById('btn-wa-toko');
+        if (btnWAToko) {
+            btnWAToko.addEventListener('click', () => {
+                const d = STATE.delivery;
+                const p = STATE.profile;
+                const jarak = haversine(
+                    d.lokasiBerangkat.lat, d.lokasiBerangkat.lng,
+                    d.lokasiSampai.lat, d.lokasiSampai.lng
+                );
+                const msg = `*LAPORAN DELIVERY SELESAI* ✅
+
+📦 ID: ${d.id}
+👤 Deliman: ${p.namaDeliman}
+👤 Konsumen: ${p.namaKonsumen}
+📋 Resi: ${d.resiNumber || '-'}
+
+📍 Berangkat: ${d.lokasiBerangkat.lat.toFixed(6)}, ${d.lokasiBerangkat.lng.toFixed(6)}
+📍 Sampai: ${d.lokasiSampai.lat.toFixed(6)}, ${d.lokasiSampai.lng.toFixed(6)}
+📏 Jarak: ${jarak.toFixed(2)} km
+⏱️ Durasi: ${Math.round((d.lokasiSampai.timestamp - d.lokasiBerangkat.timestamp) / 60000)} menit
+
+✅ Status: SELESAI DIANTAR`;
+                sendWA(p.noToko, msg);
+                showToast('💬 Laporan terkirim ke Toko');
+            });
+        }
+        
+        const btnWAKonsumen = document.getElementById('btn-wa-konsumen');
+        if (btnWAKonsumen) {
+            btnWAKonsumen.addEventListener('click', () => {
+                const p = STATE.profile;
+                const d = STATE.delivery;
+                const msg = `Halo Kak ${p.namaKonsumen},
+
+✅ Pesanan Anda sudah sampai dengan selamat!
+Terima kasih sudah order 🙏
+
+Diantar oleh: ${p.namaDeliman}
+Resi: ${d.resiNumber || '-'}
+
+⭐ Beri bintang 5 ya Kak!
+
+---
+Terima kasih 🙏`;
+                sendWA(p.noKonsumen, msg);
+                showToast('💬 Konfirmasi terkirim ke konsumen');
+            });
+        }
+        
+        // FIX: TOMBOL DELIVERY BARU
+        const btnNewDelivery = document.getElementById('btn-new-delivery');
+        if (btnNewDelivery) {
+            btnNewDelivery.addEventListener('click', resetToSetup);
+        }
+        
+        const btnLogExport = document.getElementById('btn-log-export');
+        if (btnLogExport) {
+            btnLogExport.addEventListener('click', exportExcel);
+        }
+        
+        const btnLogInfo = document.getElementById('btn-log-info');
+        if (btnLogInfo) {
+            btnLogInfo.addEventListener('click', showLogInfo);
+        }
+    }
+    
+    // ===== STEP 5 =====
+    if (step === 5) {
+        const btnExportExcel = document.getElementById('btn-export-excel');
+        if (btnExportExcel) {
+            btnExportExcel.addEventListener('click', exportExcel);
+        }
+        
+        const btnExportSheets = document.getElementById('btn-export-sheets');
+        if (btnExportSheets) {
+            btnExportSheets.addEventListener('click', () => {
+                const url = prompt('📤 Masukkan URL Google Sheets (kosongkan untuk buka baru):');
+                if (url) {
+                    window.open(url, '_blank');
+                    showToast('📤 Buka Sheets, paste data dari tab lain');
+                } else {
+                    window.open('https://sheets.google.com', '_blank');
+                    showToast('📤 Buka Sheets baru, paste data dari export HTML');
+                }
+            });
+        }
+        
+        const btnExportHTML = document.getElementById('btn-export-html');
+        if (btnExportHTML) {
+            btnExportHTML.addEventListener('click', exportToGoogleSheets);
+        }
+        
+        const btnClearLogs = document.getElementById('btn-clear-logs');
+        if (btnClearLogs) {
+            btnClearLogs.addEventListener('click', () => {
+                if (confirm('Hapus semua log?')) {
+                    STATE.logs = [];
+                    saveToStorage('logs', STATE.logs);
+                    showToast('🗑️ Log dihapus');
+                    render();
+                }
+            });
+        }
+        
+        $$('.log-item').forEach(el => {
+            el.addEventListener('click', () => {
+                const idx = parseInt(el.dataset.index);
+                const log = STATE.logs[idx];
+                if (log) showLogDetail(log);
+            });
+        });
+    }
+}
+
+function updateStepUI() {}
 
 // ================================================================
 // NETWORK STATUS
@@ -2128,7 +1860,7 @@ window.addEventListener('offline', () => {
 });
 
 // ================================================================
-// LOAD SAVED DATA
+// LOAD DATA
 // ================================================================
 
 function loadSavedData() {
@@ -2141,7 +1873,6 @@ function loadSavedData() {
     const logs = loadFromStorage('logs');
     if (logs && Array.isArray(logs)) STATE.logs = logs;
     
-    // Check if delivery is completed
     if (STATE.delivery.status === 'selesai') {
         STATE.step = 4;
     } else if (STATE.delivery.status === 'otw') {
@@ -2168,20 +1899,8 @@ console.log('✅ Status:', STATE.delivery.status);
 console.log('📦 Logs:', STATE.logs.length);
 console.log('📍 Step:', STATE.step);
 console.log('🌐 Online:', STATE.isOnline);
-
-// ================================================================
-// SERVICE WORKER (PWA)
-// ================================================================
-
-if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-    try {
-        // Simple SW registration - skip if not needed
-        console.log('📦 PWA ready');
-    } catch (e) {}
-}
-
+console.log('📷 Kamera: FIXED!');
 console.log('✅ Delivery Track Pro siap digunakan!');
 </script>
-
 </body>
 </html>
